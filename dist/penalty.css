@@ -68,3 +68,4 @@
 
 #stage.penalty-stage{padding:0;text-align:initial}#stage #pa-arena{padding:0;color-scheme:dark}#pa-arena .game{max-width:none;border:0;border-radius:0}#pa-arena .content{text-align:right}#pa-arena .sentence-question{font-size:clamp(18px,3vw,26px);direction:ltr;text-align:left;line-height:1.6;overflow-wrap:anywhere}#pa-arena .choice[dir=ltr]{direction:ltr}#pa-arena .bottom{padding:12px 24px}#pa-arena .jersey-label{max-width:100%;overflow-wrap:anywhere}
 #pa-arena .shooter-name{left:12px;right:auto;max-width:calc(100% - 130px);white-space:normal;transform:none}
+#pa-arena .pips{flex-wrap:wrap;max-width:140px}#pa-arena .team-owner{display:block;font:400 10px Heebo,Arial,sans-serif;letter-spacing:0;color:#c5d6dd;margin:3px 0}

@@ -1,6 +1,9 @@
 {
   "passed": true,
-  "clozes": 2,
+  "clozes": 3,
+  "rounds": 6,
+  "independentAlternatingScores": true,
+  "suddenDeath": true,
   "viewportWidths": [
     320,
     390,
@@ -8,6 +11,6 @@
     1280
   ],
   "missions": 1,
-  "xp": 55,
+  "xp": 65,
   "errors": []
 }

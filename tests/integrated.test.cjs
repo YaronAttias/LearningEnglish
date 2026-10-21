@@ -30,3 +30,16 @@ scenario('DEFENSE-01: matching corner saves immediately; duplicate corner clicks
 scenario('DEFENSE-02: different corner concedes exactly one opponent goal',a=>{reachDefense(a);right(a).click();a.click('.target.t3');assert.equal(a.$('[data-score="home"]').textContent,'1');assert.equal(a.$('[data-score="away"]').textContent,'1');assert.equal(a.all('[data-team="away"] .pip.goal').length,1);assert.equal(a.$('canvas').dataset.keeperMotion,'dive');});
 scenario('DEFENSE-03: two errors force a stationary keeper, goal, answer reveal and no word reward',a=>{reachDefense(a);const q=a.w.eval('mission[step]'),before=a.state().game.xp;a.all('[data-penalty-choice]').find(b=>b!==right(a)).click();assert.equal(a.$('#pa-arena').dataset.phase,'defense-question');assert.equal(a.$('[data-score="away"]').textContent,'0');a.all('[data-penalty-choice]').find(b=>!b.disabled&&b!==right(a)).click();assert.equal(a.$('canvas').dataset.keeperMotion,'stationary');assert.equal(a.$('[data-score="away"]').textContent,'1');assert.ok(a.$('.answer-reveal').textContent.includes(q.w.en));assert.ok(a.$('.answer-reveal').textContent.includes(q.w.he));assert.equal(a.all('.target').length,0);assert.equal(a.state().game.xp,before);assert.equal(a.state().stats[q.w.en].focus,true);});
 scenario('DEFENSE-04: retry success permits saving and keeps the word marked for review',a=>{reachDefense(a);const q=a.w.eval('mission[step]'),before=a.state().game.xp;a.all('[data-penalty-choice]').find(b=>b!==right(a)).click();right(a).click();assert.equal(a.$('#pa-arena').dataset.phase,'defense-aim');a.click('.target.t0');assert.equal(a.$('[data-score="away"]').textContent,'0');assert.equal(a.$('canvas').dataset.keeperMotion,'dive');assert.equal(a.state().game.xp,before);assert.equal(a.state().stats[q.w.en].focus,true);});
+for(const role of ['attack','defend'])for(const type of [2,3])scenario('FOCUS-PENALTY: '+role+' type '+type+' updates immediately, survives repeated correct answer and reload',a=>{
+  a.importText(type===3?'apple | תפוח | I eat an apple. | אני אוכל תפוח | I eat an ___.\npear | אגס | I eat a pear. | אני אוכל אגס | I eat a ___.':'apple | תפוח\npear | אגס');
+  a.w.Math.random=()=>.5;begin(a);
+  if(role==='defend'){right(a).click();a.click('.target.t1');a.click('#pa-arena .kick');}
+  const current=a.w.eval('mission[step]');assert.equal(current.type,type);const name=current.w.en;
+  a.all('[data-penalty-choice]').find(b=>b!==right(a)).click();
+  assert.ok(a.all('[data-focus]').some(b=>b.dataset.focus===name));assert.equal(a.$('#focusCount').textContent,'1 מילים');assert.equal(a.state().stats[name].focus,true);
+  right(a).click();a.click('.target.t1');a.click('#pa-arena .kick');
+  for(let turns=0;a.w.eval('mission[step].w.en')!==name&&turns<4;turns++){right(a).click();a.click('.target.t1');a.click('#pa-arena .kick');}
+  assert.equal(a.w.eval('mission[step].w.en'),name);right(a).click();
+  assert.equal(a.state().stats[name].focus,true);assert.equal(a.state().stats[name].attempts,1);assert.ok(a.all('[data-focus]').some(b=>b.dataset.focus===name));
+  const b=boot({stored:a.state()});try{assert.ok(b.all('[data-focus]').some(button=>button.dataset.focus===name));assert.equal(b.state().stats[name].focus,true);}finally{b.close();}
+});

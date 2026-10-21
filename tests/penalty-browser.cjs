@@ -12,14 +12,14 @@ await page.locator('.mission-cta').click();
 await page.getByRole('button',{name:'ברצלונה',exact:true}).click();
 await page.getByRole('button',{name:'לאמין ימאל',exact:true}).click();
 await page.getByRole('button',{name:'עולים למגרש ←',exact:true}).click();
-let clozes=0,rounds=0;
+let clozes=0,rounds=0;const wrongWords=[];
 async function scores(){return page.evaluate(()=>[Number(document.querySelector('[data-score="home"]').textContent),Number(document.querySelector('[data-score="away"]').textContent)]);}
 for(let i=0;i<10;i++){
 const before=await scores();rounds++;
 const q=await page.evaluate(()=>({type:mission[step].type,en:mission[step].w.en,he:mission[step].w.he}));
 if(q.type===3){clozes++;if(!(await page.locator('.sentence-question').textContent()).includes('___'))throw Error('Missing cloze');if(await page.locator('#pa-arena .word').count())throw Error('Cloze answer exposed');await page.locator('.workspace').screenshot({path:path.join(out,'league-cloze.png')});}
 const choices=page.locator('[data-penalty-choice]');
-if(i===0){const wrong=choices.filter({hasNotText:q.type===3?q.en:q.he});await wrong.nth(0).click();await wrong.nth(1).click();await page.locator('.answer-reveal').waitFor();if(!(await page.locator('.answer-reveal').textContent()).includes(q.en))throw Error('Reveal missing');}
+if(i===0){const wrong=choices.filter({hasNotText:q.type===3?q.en:q.he});await wrong.nth(0).click();wrongWords.push(q.en);if(!(await page.locator('#focusWords [data-focus]').evaluateAll(nodes=>nodes.map(n=>n.dataset.focus))).includes(q.en))throw Error('Attack focus did not update immediately');await wrong.nth(1).click();await page.locator('.answer-reveal').waitFor();if(!(await page.locator('.answer-reveal').textContent()).includes(q.en))throw Error('Reveal missing');}
 else{await page.getByRole('button',{name:q.type===3?q.en:q.he,exact:true}).click();if(await page.locator('#pa-arena input').count()||await page.locator('#pa-arena .kick').count())throw Error('Extra attack control remains');await page.getByRole('button',{name:'ימין גבוה',exact:true}).click();}
 await page.getByRole('button',{name:'לתור השוער שלי'}).waitFor();
 const afterHome=await scores();if(afterHome[1]!==before[1]||afterHome[0]!==before[0]+Number(i!==0))throw Error('Home kick changed wrong score');
@@ -27,7 +27,7 @@ await page.getByRole('button',{name:'לתור השוער שלי'}).click();
 if(await page.locator('#pa-arena').getAttribute('data-phase')!=='defense-question')throw Error('No defense question');
 const defense=await page.evaluate(()=>({type:mission[step].type,en:mission[step].w.en,he:mission[step].w.he}));
 if(defense.type===3)clozes++;
-if(i===1){const choices=page.locator('[data-penalty-choice]').filter({hasNotText:defense.type===3?defense.en:defense.he});await choices.nth(0).click();await choices.nth(1).click();}
+if(i===1){const choices=page.locator('[data-penalty-choice]').filter({hasNotText:defense.type===3?defense.en:defense.he});await choices.nth(0).click();wrongWords.push(defense.en);if(!(await page.locator('#focusWords [data-focus]').evaluateAll(nodes=>nodes.map(n=>n.dataset.focus))).includes(defense.en))throw Error('Defense focus did not update immediately');await choices.nth(1).click();}
 else{await page.getByRole('button',{name:defense.type===3?defense.en:defense.he,exact:true}).click();if(await page.locator('#pa-arena .kick').count())throw Error('Extra defense click remains');if(i===4)await page.locator('.workspace').screenshot({path:path.join(out,'league-defense.png')});await page.getByRole('button',{name:'ימין גבוה',exact:true}).click();}
 await page.getByRole('button',{name:i===5?'לשריקת הסיום':'לבעיטה הבאה'}).waitFor();
 if(i===1){if(await page.locator('canvas').getAttribute('data-keeper-motion')!=='stationary')throw Error('Keeper moved after two errors');if(!(await page.locator('.answer-reveal').textContent()).includes(defense.en))throw Error('Defense answer not revealed');}
@@ -40,6 +40,7 @@ const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem('wordsteps-g
 if(saved.game.missions!==1||saved.game.xp!==saved.game.correct*10+15)throw Error('Reward mismatch '+JSON.stringify(saved.game));
 await page.reload({waitUntil:'domcontentloaded'});
 if(!(await page.locator('#gamePanel').textContent()).includes(String(saved.game.xp)))throw Error('Progress lost after reload');
+const restoredFocus=await page.locator('#focusWords [data-focus]').evaluateAll(nodes=>nodes.map(n=>n.dataset.focus));if(wrongWords.some(w=>!restoredFocus.includes(w)))throw Error('Focus words lost after match/reload');
 for(const width of [320,390,768,1280]){
 await page.setViewportSize({width,height:1000});await page.locator('.mission-cta').click();
 if(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth))throw Error('Overflow '+width);

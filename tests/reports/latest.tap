@@ -2,360 +2,372 @@ TAP version 13
 # Subtest: CONTENT-01: 58 unique words, 46 core and 12 EXTRA
 ok 1 - CONTENT-01: 58 unique words, 46 core and 12 EXTRA
   ---
-  duration_ms: 125.8075
+  duration_ms: 121.3747
   type: 'test'
   ...
 # Subtest: LEARN-01: first word, Hebrew meaning and accessible picture
 ok 2 - LEARN-01: first word, Hebrew meaning and accessible picture
   ---
-  duration_ms: 33.3081
+  duration_ms: 34.1325
   type: 'test'
   ...
 # Subtest: LEARN-02: next, previous and wrap around
 ok 3 - LEARN-02: next, previous and wrap around
   ---
-  duration_ms: 234.6997
+  duration_ms: 242.9079
   type: 'test'
   ...
 # Subtest: IMAGES-01: all 58 cards have distinct valid crop rectangles
 ok 4 - IMAGES-01: all 58 cards have distinct valid crop rectangles
   ---
-  duration_ms: 178.5265
+  duration_ms: 186.1146
   type: 'test'
   ...
 # Subtest: AUDIO-01: hearing a word requests English speech at learning speed
 ok 5 - AUDIO-01: hearing a word requests English speech at learning speed
   ---
-  duration_ms: 18.1671
+  duration_ms: 18.1203
   type: 'test'
   ...
 # Subtest: AUDIO-02: unavailable speech shows a useful message
 ok 6 - AUDIO-02: unavailable speech shows a useful message
   ---
-  duration_ms: 17.9466
+  duration_ms: 19.109
   type: 'test'
   ...
 # Subtest: FILTER-01: core has 46 words and EXTRA has 12
 ok 7 - FILTER-01: core has 46 words and EXTRA has 12
   ---
-  duration_ms: 24.8814
+  duration_ms: 26.9894
   type: 'test'
   ...
 # Subtest: FILTER-02: no focus words gives an empty state
 ok 8 - FILTER-02: no focus words gives an empty state
   ---
-  duration_ms: 21.6623
+  duration_ms: 22.0271
   type: 'test'
   ...
 # Subtest: WRITE-01: empty answer does not count as an attempt
 ok 9 - WRITE-01: empty answer does not count as an attempt
   ---
-  duration_ms: 23.7557
+  duration_ms: 25.6724
   type: 'test'
   ...
 # Subtest: WRITE-02: case and surrounding spaces are accepted
 ok 10 - WRITE-02: case and surrounding spaces are accepted
   ---
-  duration_ms: 40.6093
+  duration_ms: 50.6674
   type: 'test'
   ...
 # Subtest: WRITE-03: curly apostrophe is normalized
 ok 11 - WRITE-03: curly apostrophe is normalized
   ---
-  duration_ms: 125.267
+  duration_ms: 132.1351
   type: 'test'
   ...
 # Subtest: WRITE-04: wrong answer creates a focus word and retry succeeds
 ok 12 - WRITE-04: wrong answer creates a focus word and retry succeeds
   ---
-  duration_ms: 32.6372
+  duration_ms: 31.411
   type: 'test'
   ...
 # Subtest: WRITE-05: reveal counts as needing practice
 ok 13 - WRITE-05: reveal counts as needing practice
   ---
-  duration_ms: 24.4554
+  duration_ms: 24.9499
   type: 'test'
   ...
 # Subtest: WRITE-06: double submission cannot double count after success
 ok 14 - WRITE-06: double submission cannot double count after success
   ---
-  duration_ms: 26.7936
+  duration_ms: 28.133
   type: 'test'
   ...
 # Subtest: MEANING-01: 4 distinct choices include the correct answer
 ok 15 - MEANING-01: 4 distinct choices include the correct answer
   ---
-  duration_ms: 19.1363
+  duration_ms: 20.0903
   type: 'test'
   ...
 # Subtest: MEANING-02: correct choice provides success and next
 ok 16 - MEANING-02: correct choice provides success and next
   ---
-  duration_ms: 29.1117
+  duration_ms: 26.82
   type: 'test'
   ...
 # Subtest: FOCUS-01: individual removal preserves another word and attempt history
 ok 17 - FOCUS-01: individual removal preserves another word and attempt history
   ---
-  duration_ms: 39.4939
+  duration_ms: 42.1104
   type: 'test'
   ...
 # Subtest: FOCUS-02: removing the last focused card handles empty state
 ok 18 - FOCUS-02: removing the last focused card handles empty state
   ---
-  duration_ms: 38.7707
+  duration_ms: 35.2665
   type: 'test'
   ...
 # Subtest: STORAGE-01: independent users have independent progress
 ok 19 - STORAGE-01: independent users have independent progress
   ---
-  duration_ms: 40.492
+  duration_ms: 41.042
   type: 'test'
   ...
 # Subtest: STORAGE-02: progress survives a reload with the same saved data
 ok 20 - STORAGE-02: progress survives a reload with the same saved data
   ---
-  duration_ms: 44.4198
+  duration_ms: 46.76
   type: 'test'
   ...
 # Subtest: STORAGE-03: malformed JSON falls back to default content
 ok 21 - STORAGE-03: malformed JSON falls back to default content
   ---
-  duration_ms: 16.3012
+  duration_ms: 17.0074
   type: 'test'
   ...
 # Subtest: STORAGE-04: blocked storage does not prevent practice
 ok 22 - STORAGE-04: blocked storage does not prevent practice
   ---
-  duration_ms: 23.7168
+  duration_ms: 24.268
   type: 'test'
   ...
 # Subtest: RESET-01: cancel leaves progress unchanged
 ok 23 - RESET-01: cancel leaves progress unchanged
   ---
-  duration_ms: 26.8956
+  duration_ms: 30.3864
   type: 'test'
   ...
 # Subtest: RESET-02: accepted reset clears progress but retains content
 ok 24 - RESET-02: accepted reset clears progress but retains content
   ---
-  duration_ms: 53.5868
+  duration_ms: 46.9658
   type: 'test'
   ...
 # Subtest: IMPORT-01: simple list replaces content and clears old progress
 ok 25 - IMPORT-01: simple list replaces content and clears old progress
   ---
-  duration_ms: 26.951
+  duration_ms: 27.4178
   type: 'test'
   ...
 # Subtest: IMPORT-02: invalid, empty, duplicate and invalid-cloze lists are rejected
 ok 26 - IMPORT-02: invalid, empty, duplicate and invalid-cloze lists are rejected
   ---
-  duration_ms: 16.591
+  duration_ms: 17.1875
   type: 'test'
   ...
 # Subtest: IMPORT-03: full format supports EXTRA and sentence practice
 ok 27 - IMPORT-03: full format supports EXTRA and sentence practice
   ---
-  duration_ms: 22.53
+  duration_ms: 22.0356
   type: 'test'
   ...
 # Subtest: SECURITY-01: imported HTML remains text instead of executing
 ok 28 - SECURITY-01: imported HTML remains text instead of executing
   ---
-  duration_ms: 21.3567
+  duration_ms: 22.1539
   type: 'test'
   ...
 # Subtest: SENTENCE-01: all original examples contain a usable blank
 ok 29 - SENTENCE-01: all original examples contain a usable blank
   ---
-  duration_ms: 21.1793
+  duration_ms: 20.9636
   type: 'test'
   ...
 # Subtest: RESTORE-01: original words and illustrations can be restored
 ok 30 - RESTORE-01: original words and illustrations can be restored
   ---
-  duration_ms: 27.1502
+  duration_ms: 24.8407
   type: 'test'
   ...
 # Subtest: ROUND-01: single-word round ends and can restart
 ok 31 - ROUND-01: single-word round ends and can restart
   ---
-  duration_ms: 22.9866
+  duration_ms: 22.1505
   type: 'test'
   ...
 # Subtest: A11Y-01: direction, form labels, live feedback and pressed mode are present
 ok 32 - A11Y-01: direction, form labels, live feedback and pressed mode are present
   ---
-  duration_ms: 21.7806
+  duration_ms: 22.78
   type: 'test'
   ...
 # Subtest: EXPORT-01: text download preserves 58 entries, Hebrew and EXTRA
 ok 33 - EXPORT-01: text download preserves 58 entries, Hebrew and EXTRA
   ---
-  duration_ms: 17.6734
+  duration_ms: 22.6308
   type: 'test'
   ...
 # Subtest: IMPORT-04: cancellation preserves content and progress
 ok 34 - IMPORT-04: cancellation preserves content and progress
   ---
-  duration_ms: 31.5646
+  duration_ms: 25.4736
   type: 'test'
   ...
 # Subtest: ROBUSTNESS-01: valid JSON with corrupt word records must recover safely
 ok 35 - ROBUSTNESS-01: valid JSON with corrupt word records must recover safely
   ---
-  duration_ms: 15.7577
+  duration_ms: 16.6336
   type: 'test'
   ...
 # Subtest: ROBUSTNESS-02: nonnumeric saved attempt count must not corrupt progress
 ok 36 - ROBUSTNESS-02: nonnumeric saved attempt count must not corrupt progress
   ---
-  duration_ms: 23.7806
+  duration_ms: 26.6374
   type: 'test'
   ...
-# PERF_ASSET_BYTES=3188062
-# PERF_DOM_STARTUP_MS=107.78
-# PERF_58_CARDS_MS=205.11
+# PERF_ASSET_BYTES=3220976
+# PERF_DOM_STARTUP_MS=116.62
+# PERF_58_CARDS_MS=216.45
 # Subtest: DELIVERY-01: deployment identity and entrypoint match
 ok 37 - DELIVERY-01: deployment identity and entrypoint match
   ---
-  duration_ms: 1.509
+  duration_ms: 1.0955
   type: 'test'
   ...
 # Subtest: DELIVERY-02: all linked local scripts, stylesheet and picture exist
 ok 38 - DELIVERY-02: all linked local scripts, stylesheet and picture exist
   ---
-  duration_ms: 1.2093
+  duration_ms: 0.5073
   type: 'test'
   ...
 # Subtest: DELIVERY-03: atlas has the expected actual image dimensions
 ok 39 - DELIVERY-03: atlas has the expected actual image dimensions
   ---
-  duration_ms: 1.5035
+  duration_ms: 1.2716
   type: 'test'
   ...
 # Subtest: SECURITY-02: deployed directory contains no credential or configuration files
 ok 40 - SECURITY-02: deployed directory contains no credential or configuration files
   ---
-  duration_ms: 2.9629
+  duration_ms: 3.0327
   type: 'test'
   ...
 # Subtest: MOBILE-01: viewport and narrow-screen layout rules are shipped
 ok 41 - MOBILE-01: viewport and narrow-screen layout rules are shipped
   ---
-  duration_ms: 0.7622
+  duration_ms: 0.7312
   type: 'test'
   ...
 # Subtest: PERF-01: initial uncompressed application assets stay below 4 MiB
 ok 42 - PERF-01: initial uncompressed application assets stay below 4 MiB
   ---
-  duration_ms: 1.3083
+  duration_ms: 0.7967
   type: 'test'
   ...
 # Subtest: PERF-02: application startup stays below 1500 ms in local DOM harness
 ok 43 - PERF-02: application startup stays below 1500 ms in local DOM harness
   ---
-  duration_ms: 109.8314
+  duration_ms: 117.5895
   type: 'test'
   ...
 # Subtest: PERF-03: 58-card navigation stays below 5000 ms in local DOM harness
 ok 44 - PERF-03: 58-card navigation stays below 5000 ms in local DOM harness
   ---
-  duration_ms: 241.7867
+  duration_ms: 252.8462
   type: 'test'
   ...
 # Subtest: INTEGRATED-01: complete five answers, award XP, level and badges, reload
 ok 45 - INTEGRATED-01: complete five answers, award XP, level and badges, reload
   ---
-  duration_ms: 273.3161
+  duration_ms: 259.373
   type: 'test'
   ...
 # Subtest: ADAPTIVE-01: weak words precede future reviews and wrong retry stays weak
 ok 46 - ADAPTIVE-01: weak words precede future reviews and wrong retry stays weak
   ---
-  duration_ms: 58.6961
+  duration_ms: 39.8061
   type: 'test'
   ...
 # Subtest: ADAPTIVE-02: 70 translation / 30 cloze across two complete missions
 ok 47 - ADAPTIVE-02: 70 translation / 30 cloze across two complete missions
   ---
-  duration_ms: 99.285
+  duration_ms: 95.3498
   type: 'test'
   ...
 # Subtest: ADAPTIVE-03: correct answers schedule spaced review and double clicks award once
 ok 48 - ADAPTIVE-03: correct answers schedule spaced review and double clicks award once
   ---
-  duration_ms: 38.4693
+  duration_ms: 38.2942
   type: 'test'
   ...
 # Subtest: GAME-01: same word on the same day earns no repeated word XP
 ok 49 - GAME-01: same word on the same day earns no repeated word XP
   ---
-  duration_ms: 45.4316
+  duration_ms: 46.6075
   type: 'test'
   ...
-# Subtest: GAME-02: reveal grants no answer reward
-ok 50 - GAME-02: reveal grants no answer reward
+# Subtest: PENALTY-01: two errors count as a miss and reveal the answer, with no reward
+ok 50 - PENALTY-01: two errors count as a miss and reveal the answer, with no reward
   ---
-  duration_ms: 31.8845
+  duration_ms: 36.6681
   type: 'test'
   ...
 # Subtest: GAME-03: accepted reset clears game and learning state together
 ok 51 - GAME-03: accepted reset clears game and learning state together
   ---
-  duration_ms: 43.1641
+  duration_ms: 48.702
   type: 'test'
   ...
 # Subtest: FEED-01: keyboard advances only focused learning card
 ok 52 - FEED-01: keyboard advances only focused learning card
   ---
-  duration_ms: 24.4398
+  duration_ms: 24.2815
   type: 'test'
   ...
 # Subtest: CONTENT-02: 58 bilingual sentences, exact cloze substitutions and EXTRA coverage
 ok 53 - CONTENT-02: 58 bilingual sentences, exact cloze substitutions and EXTRA coverage
   ---
-  duration_ms: 18.8206
+  duration_ms: 17.8289
   type: 'test'
   ...
 # Subtest: STORAGE-05: malformed game and stats fields do not break a mission
 ok 54 - STORAGE-05: malformed game and stats fields do not break a mission
   ---
-  duration_ms: 27.6957
+  duration_ms: 33.0253
   type: 'test'
   ...
 # Subtest: ADAPTIVE-04: empty focus group and one-word imported list work
 ok 55 - ADAPTIVE-04: empty focus group and one-word imported list work
   ---
-  duration_ms: 35.2206
+  duration_ms: 45.8061
   type: 'test'
   ...
 # Subtest: MIGRATION-01: previous default saved list gains examples without losing progress
 ok 56 - MIGRATION-01: previous default saved list gains examples without losing progress
   ---
-  duration_ms: 13.3926
+  duration_ms: 13.6779
   type: 'test'
   ...
 # Subtest: GAME-04: levels and remaining achievement conditions unlock together
 ok 57 - GAME-04: levels and remaining achievement conditions unlock together
   ---
-  duration_ms: 25.9413
+  duration_ms: 25.6437
   type: 'test'
   ...
 # Subtest: FEED-02: upward touch gesture advances a learning card
 ok 58 - FEED-02: upward touch gesture advances a learning card
   ---
-  duration_ms: 24.0999
+  duration_ms: 21.4821
   type: 'test'
   ...
-1..58
-# tests 58
+# Subtest: PENALTY-02: cloze uses active vocabulary, hides target and offers English answers
+ok 59 - PENALTY-02: cloze uses active vocabulary, hides target and offers English answers
+  ---
+  duration_ms: 57.0583
+  type: 'test'
+  ...
+# Subtest: PENALTY-03: leaving during a shot cannot award a completed match
+ok 60 - PENALTY-03: leaving during a shot cannot award a completed match
+  ---
+  duration_ms: 32.8681
+  type: 'test'
+  ...
+1..60
+# tests 60
 # suites 0
-# pass 58
+# pass 60
 # fail 0
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 6790.7729
+# duration_ms 5624.5136

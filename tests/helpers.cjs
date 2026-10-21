@@ -11,6 +11,9 @@ function boot({stored,storageBlocked=false,speech=true,confirm=true}={}){
   if(stored!==undefined)w.localStorage.setItem(KEY,typeof stored==='string'?stored:JSON.stringify(stored));
   if(storageBlocked){w.Storage.prototype.getItem=function(){throw Error('blocked');};w.Storage.prototype.setItem=function(){throw Error('blocked');};}
   const vm=require('node:vm');
+  let frameTime=0;w.requestAnimationFrame=fn=>{fn(frameTime+=100);return 0;};w.cancelAnimationFrame=()=>{};
+  vm.runInContext(fs.readFileSync(path.join(root,'dist/penalty.js'),'utf8'),dom.getInternalVMContext(),{filename:'penalty.js'});
+  const mount=w.WordPenalty.mount;w.WordPenalty.mount=(host,options)=>mount(host,{...options,noCanvas:true,instant:true});
   vm.runInContext(fs.readFileSync(path.join(root,'dist/words.js'),'utf8'),dom.getInternalVMContext(),{filename:'words.js'});
   vm.runInContext(fs.readFileSync(path.join(root,'dist/app.js'),'utf8'),dom.getInternalVMContext(),{filename:'app.js'});
   const $=s=>w.document.querySelector(s), all=s=>[...w.document.querySelectorAll(s)];

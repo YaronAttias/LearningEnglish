@@ -1,0 +1,70 @@
+
+
+#pa-arena{padding:12px 0;font-family:'Heebo',Arial,sans-serif;color-scheme:light dark;--pa-bg:light-dark(#f2f5f4,#101b20);--pa-fg:light-dark(#142c33,#f0f7f8);--pa-dim:light-dark(#567078,#a2bac2);--pa-line:light-dark(#cfdddf,#2c414a);--pa-button:light-dark(#ffffff,#192d35);--pa-lime:#cbff6b;--pa-ink:#101e23}
+#pa-arena *{box-sizing:border-box}
+#pa-arena .game{max-width:700px;margin:auto;background:var(--pa-bg);color:var(--pa-fg);border:1px solid var(--pa-line);border-radius:20px;overflow:hidden}
+#pa-arena .top{display:flex;align-items:center;justify-content:space-between;padding:16px 22px;gap:12px}
+#pa-arena .logo{font-family:'Barlow Condensed',Arial,sans-serif;font-size:24px;font-weight:800;letter-spacing:1px;direction:ltr;line-height:1}
+#pa-arena .logo span{color:light-dark(#426f12,#cbff6b)}
+#pa-arena .eyebrow{font-size:11px;letter-spacing:1px;color:var(--pa-dim)}
+#pa-arena .arena{position:relative;aspect-ratio:1000/560;isolation:isolate;background:#0b1725;direction:ltr;overflow:hidden}
+#pa-arena canvas{display:block;position:absolute;inset:0;width:100%;height:100%}
+#pa-arena .hud{position:absolute;inset:14px 0 auto;display:flex;justify-content:center;pointer-events:none}
+#pa-arena .scoreboard{display:flex;align-items:center;gap:17px;background:#0a1828ed;border:1px solid #ffffff25;padding:10px 20px;border-radius:8px;box-shadow:0 5px 20px #0004;color:#fff}
+#pa-arena .team{text-align:center;font-size:11px;letter-spacing:1px;color:#c2d2de}
+#pa-arena .crest{display:inline-grid;place-items:center;width:23px;height:27px;clip-path:polygon(0 0,100% 0,100% 70%,50% 100%,0 70%);background:#cbff6b;color:#142419;margin-right:5px;font-weight:800}
+#pa-arena .away{background:#75a7ff;color:#102141}
+#pa-arena .scores{font-family:'Barlow Condensed',Arial,sans-serif;font-size:32px;white-space:nowrap;letter-spacing:5px}
+#pa-arena .pips{display:flex;justify-content:center;gap:5px;margin-top:6px}
+#pa-arena .pip{width:7px;height:7px;border-radius:50%;background:#ffffff30}
+#pa-arena .pip.goal{background:#cbff6b}#pa-arena .pip.miss{background:#ef8b86}
+#pa-arena .round{position:absolute;right:14px;bottom:12px;color:#e1f3e8;background:#09271bba;padding:5px 10px;border-radius:4px;font-size:11px;direction:rtl}
+#pa-arena .targets{position:absolute;inset:0}
+#pa-arena .target{position:absolute;width:12%;height:16%;border:1px solid #cbff6ba0;background:#cbff6b16;border-radius:50%;color:#e3ffab;font:500 12px 'Heebo',Arial,sans-serif;min-height:42px;display:grid;place-items:center;transition:background .2s,box-shadow .2s}
+#pa-arena .target:hover,#pa-arena .target[aria-pressed=true]{background:#cbff6b44;border:2px solid #e1ffa8;box-shadow:0 0 20px #cbff6b50}
+#pa-arena .target:disabled{opacity:.45}
+#pa-arena .t0{left:27%;top:32%}#pa-arena .t1{left:61%;top:32%}#pa-arena .t2{left:27%;top:49%}#pa-arena .t3{left:61%;top:49%}
+#pa-arena .flash{position:absolute;left:0;right:0;top:33%;text-align:center;pointer-events:none;color:#cbff6b;text-shadow:0 3px 0 #09271b,0 5px 30px #000;font-family:'Barlow Condensed','Heebo',sans-serif;font-size:clamp(38px,9vw,76px);font-weight:800;transform:rotate(-5deg);letter-spacing:3px}
+#pa-arena .content{padding:20px 24px 22px;min-height:225px}
+#pa-arena .row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+#pa-arena .stage-tag{font-size:12px;color:var(--pa-dim)}
+#pa-arena .stage-tag b{font-weight:700;color:var(--pa-fg)}
+#pa-arena .wordrow{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:8px 0 16px}
+#pa-arena .word{font-family:'Barlow Condensed',Arial,sans-serif;font-size:42px;font-weight:700;line-height:1;direction:ltr}
+#pa-arena .sentence{font-size:13px;direction:ltr;color:var(--pa-dim);margin-top:7px}
+#pa-arena .choices{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+#pa-arena button{font:500 14px 'Heebo',Arial,sans-serif}
+#pa-arena .choice{min-height:48px;padding:10px 7px;border:1px solid var(--pa-line);border-radius:9px;background:var(--pa-button);color:var(--pa-fg);transition:transform .12s,background .15s}
+#pa-arena .choice:hover{transform:translateY(-2px);border-color:light-dark(#6a8e38,#b5e168)}
+#pa-arena .hint{font-size:13px;margin-top:12px;color:var(--pa-dim);min-height:20px}
+#pa-arena h2{font-size:24px;margin:4px 0 6px;font-weight:800}
+#pa-arena p{margin:5px 0 12px;line-height:1.6;font-size:14px}
+#pa-arena .kick{background:var(--pa-lime);color:var(--pa-ink);border:0;border-radius:9px;padding:13px 28px;min-height:48px;font-weight:800;box-shadow:0 3px 0 #658d32}
+#pa-arena .kick:disabled{opacity:.45;box-shadow:none}
+#pa-arena .power{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:16px 0 8px}
+#pa-arena .power label{flex:1;min-width:140px;font-size:12px;color:var(--pa-dim)}
+#pa-arena input{width:100%;accent-color:light-dark(#40781d,#cbff6b);display:block;margin:10px 0;height:20px}
+#pa-arena .resultline{border-right:3px solid light-dark(#658d32,#cbff6b);padding:4px 12px;margin:14px 0}
+#pa-arena .bottom{padding:11px 24px;border-top:1px solid var(--pa-line);font-size:11px;color:var(--pa-dim);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+@media(max-width:470px){#pa-arena .top{padding:14px 16px}#pa-arena .content{padding:16px;min-height:260px}#pa-arena .choices{grid-template-columns:1fr 1fr}#pa-arena .scoreboard{gap:10px;padding:6px 10px}#pa-arena .scores{font-size:24px}#pa-arena .hud{top:8px}#pa-arena .team{font-size:10px}#pa-arena .crest{display:none}#pa-arena .word{font-size:36px}#pa-arena .sentence{font-size:12px}#pa-arena .target{font-size:11px;width:14%;border-radius:8px}#pa-arena .round{font-size:10px;padding:3px 7px;bottom:5px}#pa-arena .bottom{padding:10px 16px}#pa-arena .eyebrow{font-size:10px}}
+@media(max-width:470px){#pa-arena .arena{min-height:220px}#pa-arena .target{min-height:44px;height:44px}#pa-arena .t0,#pa-arena .t1{top:27%}#pa-arena .t2,#pa-arena .t3{top:49%}}
+#pa-arena .club-picks{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:16px 0 22px}
+#pa-arena .club-pick{border:1px solid var(--pa-line);border-radius:10px;background:var(--pa-button);color:var(--pa-fg);padding:13px 5px;min-height:90px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;font-size:12px;text-align:center}
+#pa-arena .club-pick[aria-pressed=true],#pa-arena .player-pick[aria-pressed=true]{outline:2px solid light-dark(#557b28,#cbff6b);outline-offset:1px;background:light-dark(#e8f1de,#243e2d)}
+#pa-arena .shirt{display:grid;place-items:center;width:40px;height:42px;clip-path:polygon(23% 0,38% 0,43% 8%,57% 8%,62% 0,77% 0,100% 20%,84% 39%,73% 30%,73% 100%,27% 100%,27% 30%,16% 39%,0 20%);font:700 17px Arial;background:var(--kit);color:var(--kit-text);filter:drop-shadow(0 3px 2px #0004)}
+#pa-arena .players{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:12px 0 17px}
+#pa-arena .player-pick{min-height:115px;border:1px solid var(--pa-line);border-radius:12px;background:var(--pa-button);color:var(--pa-fg);padding:12px 5px;display:flex;flex-direction:column;align-items:center;gap:9px;font-size:13px}
+#pa-arena .player-pick .shirt{width:50px;height:53px}
+#pa-arena .shooter-name{position:absolute;bottom:13px;left:16px;color:#fff;background:#091c2bcc;padding:7px 12px;border-left:3px solid #cbff6b;border-radius:4px;font:500 12px 'Heebo',Arial,sans-serif;direction:rtl}
+#pa-arena .jersey-label{font:700 12px Arial;direction:ltr;letter-spacing:1px}
+#pa-arena .selection-title{margin-top:2px}
+#pa-arena .setup-start{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+#pa-arena .setup-start p{margin:0;font-size:12px;color:var(--pa-dim)}
+#pa-arena .swap{border:0;background:transparent;color:var(--pa-dim);min-height:44px;padding:8px 0;text-decoration:underline;font-size:12px}
+#pa-arena .club-source{color:var(--pa-dim);font-size:11px;text-decoration:underline}
+@media(max-width:470px){#pa-arena .club-picks{grid-template-columns:repeat(3,minmax(0,1fr))}#pa-arena .club-pick{min-height:80px}#pa-arena .player-pick{font-size:11px;min-height:110px}#pa-arena .shooter-name{font-size:10px;bottom:6px;left:7px;padding:4px 7px}#pa-arena .players{gap:7px}#pa-arena .selection-title{font-size:21px}#pa-arena .team{max-width:85px;letter-spacing:0}}
+#pa-arena .choice:disabled{opacity:.45;text-decoration:line-through}
+#pa-arena .answer-reveal{margin:12px 0;padding:14px 16px;border-radius:10px;background:light-dark(#e6efdb,#263e2d);color:var(--pa-fg);font-size:17px;font-weight:700}
+
+#stage.penalty-stage{padding:0;text-align:initial}#stage #pa-arena{padding:0;color-scheme:dark}#pa-arena .game{max-width:none;border:0;border-radius:0}#pa-arena .content{text-align:right}#pa-arena .sentence-question{font-size:clamp(18px,3vw,26px);direction:ltr;text-align:left;line-height:1.6;overflow-wrap:anywhere}#pa-arena .choice[dir=ltr]{direction:ltr}#pa-arena .bottom{padding:12px 24px}#pa-arena .jersey-label{max-width:100%;overflow-wrap:anywhere}
+#pa-arena .shooter-name{left:12px;right:auto;max-width:calc(100% - 130px);white-space:normal;transform:none}

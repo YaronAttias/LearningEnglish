@@ -1,0 +1,122 @@
+{
+  "at": "2026-10-21T07:57:34.503Z",
+  "scope": "In-app Chromium browser, viewport emulation only. Not physical iOS Safari or Android Chrome; no real users.",
+  "results": [
+    {
+      "id": "RESPONSIVE-360",
+      "ok": true,
+      "detail": {
+        "client": 346,
+        "content": 346,
+        "dir": "rtl",
+        "images": [
+          {
+            "label": "איור להמחשת abroad — בחוץ לארץ",
+            "width": 220
+          }
+        ],
+        "lang": "he",
+        "modes": 4,
+        "viewport": 361
+      }
+    },
+    {
+      "id": "PUBLIC-360",
+      "ok": true,
+      "detail": "Public app visibly present"
+    },
+    {
+      "id": "RESPONSIVE-390",
+      "ok": true,
+      "detail": {
+        "client": 376,
+        "content": 376,
+        "dir": "rtl",
+        "images": [
+          {
+            "label": "איור להמחשת abroad — בחוץ לארץ",
+            "width": 220
+          }
+        ],
+        "lang": "he",
+        "modes": 4,
+        "viewport": 391
+      }
+    },
+    {
+      "id": "PUBLIC-390",
+      "ok": true,
+      "detail": "Public app visibly present"
+    },
+    {
+      "id": "RESPONSIVE-768",
+      "ok": true,
+      "detail": {
+        "client": 753,
+        "content": 753,
+        "dir": "rtl",
+        "images": [
+          {
+            "label": "איור להמחשת abroad — בחוץ לארץ",
+            "width": 240
+          }
+        ],
+        "lang": "he",
+        "modes": 4,
+        "viewport": 768
+      }
+    },
+    {
+      "id": "PUBLIC-768",
+      "ok": true,
+      "detail": "Public app visibly present"
+    },
+    {
+      "id": "RESPONSIVE-1280",
+      "ok": true,
+      "detail": {
+        "client": 1265,
+        "content": 1265,
+        "dir": "rtl",
+        "images": [
+          {
+            "label": "איור להמחשת abroad — בחוץ לארץ",
+            "width": 240
+          }
+        ],
+        "lang": "he",
+        "modes": 4,
+        "viewport": 1280
+      }
+    },
+    {
+      "id": "PUBLIC-1280",
+      "ok": true,
+      "detail": "Public app visibly present"
+    },
+    {
+      "id": "BROWSER-58-PICTURES",
+      "ok": true,
+      "detail": {
+        "unique": 58
+      }
+    },
+    {
+      "id": "BROWSER-WRITE-FORM",
+      "ok": true,
+      "detail": "Writing input is visible; no answer submitted"
+    },
+    {
+      "id": "BROWSER-MEANING",
+      "ok": true,
+      "detail": "Four choices are rendered"
+    },
+    {
+      "id": "BROWSER-SENTENCE-EMPTY",
+      "ok": true,
+      "detail": "Expected until textbook sentences are supplied"
+    }
+  ],
+  "passed": 12,
+  "failed": 0
+}

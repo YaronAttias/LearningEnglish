@@ -1,0 +1,38 @@
+{
+  "at": "2026-10-21T11:08:18.038Z",
+  "viewports": [
+    {
+      "client": 346,
+      "content": 346,
+      "modes": 5,
+      "width": 361
+    },
+    {
+      "client": 376,
+      "content": 376,
+      "modes": 5,
+      "width": 391
+    },
+    {
+      "client": 753,
+      "content": 753,
+      "modes": 5,
+      "width": 768
+    },
+    {
+      "client": 1265,
+      "content": 1265,
+      "modes": 5,
+      "width": 1280
+    }
+  ],
+  "consoleErrors": [],
+  "checks": [
+    "correct answer updates XP",
+    "five reveals complete a mission without answer XP",
+    "reload retains XP and mission count",
+    "sentence practice renders blank",
+    "feed next and previous navigate"
+  ],
+  "scope": "In-app Chromium and viewport emulation; not physical iOS or Android."
+}

@@ -1,0 +1,224 @@
+
+> word-steps-grade8@1.0.0 test:live
+> node tests/live-smoke.cjs
+
+{
+  "at": "2026-10-21T07:53:03.134Z",
+  "base": "https://word-steps-grade8-mosaic-unit1.astralrhea17.chatgpt.site",
+  "assets": [
+    {
+      "route": "/",
+      "status": 200,
+      "url": "https://word-steps-grade8-mosaic-unit1.astralrhea17.chatgpt.site/",
+      "ms": 1951.5,
+      "bytes": 3773,
+      "contentType": "text/html",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "cspPresent": false,
+      "loginGate": false,
+      "ok": true
+    },
+    {
+      "route": "/app.js",
+      "status": 200,
+      "url": "https://word-steps-grade8-mosaic-unit1.astralrhea17.chatgpt.site/app.js",
+      "ms": 157.7,
+      "bytes": 11193,
+      "contentType": "text/javascript",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "cspPresent": false,
+      "loginGate": false,
+      "ok": true
+    },
+    {
+      "route": "/words.js",
+      "status": 200,
+      "url": "https://word-steps-grade8-mosaic-unit1.astralrhea17.chatgpt.site/words.js",
+      "ms": 132.2,
+      "bytes": 1473,
+      "contentType": "text/javascript",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "cspPresent": false,
+      "loginGate": false,
+      "ok": true
+    },
+    {
+      "route": "/style.css",
+      "status": 200,
+      "url": "https://word-steps-grade8-mosaic-unit1.astralrhea17.chatgpt.site/style.css",
+      "ms": 115.7,
+      "bytes": 5348,
+      "contentType": "text/css",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "cspPresent": false,
+      "loginGate": false,
+      "ok": true
+    },
+    {
+      "route": "/images/vocabulary-atlas.png",
+      "status": 200,
+      "url": "https://word-steps-grade8-mosaic-unit1.astralrhea17.chatgpt.site/images/vocabulary-atlas.png",
+      "ms": 598.6,
+      "bytes": 3149232,
+      "contentType": "image/png",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "cspPresent": false,
+      "loginGate": false,
+      "ok": true
+    }
+  ],
+  "readOnlyConcurrentSmoke": {
+    "requests": 12,
+    "maxConcurrency": 3,
+    "successes": 12,
+    "p50ms": 141.2,
+    "p95ms": 304.3,
+    "requestsDetail": [
+      {
+        "route": "/",
+        "status": 200,
+        "url": "https://word-steps-grade8-mosaic-unit1.astralrhea17.chatgpt.site/",
+        "ms": 304.3,
+        "bytes": 3773,
+        "contentType": "text/html",
+        "cacheControl": "public, max-age=0, must-revalidate",
+        "cspPresent": false,
+        "loginGate": false,
+        "ok": true
+      },
+      {
+        "route": "/",
+        "status": 200,
+        "url": "https://word-steps-grade8-mosaic-unit1.astralrhea17.chatgpt.site/",
+        "ms": 284.9,
+        "bytes": 3773,
+        "contentType": "text/html",
+        "cacheControl": "public, max-age=0, must-revalidate",
+        "cspPresent": false,
+        "loginGate": false,
+        "ok": true
+      },
+      {
+        "route": "/",
+        "status": 200,
+        "url": "https://word-steps-grade8-mosaic-unit1.astralrhea17.chatgpt.site/",
+        "ms": 293.8,
+        "bytes": 3773,
+        "contentType": "text/html",
+        "cacheControl": "public, max-age=0, must-revalidate",
+        "cspPresent": false,
+        "loginGate": false,
+        "ok": true
+      },
+      {
+        "route": "/",
+        "status": 200,
+        "url": "https://word-steps-grade8-mosaic-unit1.astralrhea17.chatgpt.site/",
+        "ms": 152.9,
+        "bytes": 3773,
+        "contentType": "text/html",
+        "cacheControl": "public, max-age=0, must-revalidate",
+        "cspPresent": false,
+        "loginGate": false,
+        "ok": true
+      },
+      {
+        "route": "/",
+        "status": 200,
+        "url": "https://word-steps-grade8-mosaic-unit1.astralrhea17.chatgpt.site/",
+        "ms": 168.5,
+        "bytes": 3773,
+        "contentType": "text/html",
+        "cacheControl": "public, max-age=0, must-revalidate",
+        "cspPresent": false,
+        "loginGate": false,
+        "ok": true
+      },
+      {
+        "route": "/",
+        "status": 200,
+        "url": "https://word-steps-grade8-mosaic-unit1.astralrhea17.chatgpt.site/",
+        "ms": 125.5,
+        "bytes": 3773,
+        "contentType": "text/html",
+        "cacheControl": "public, max-age=0, must-revalidate",
+        "cspPresent": false,
+        "loginGate": false,
+        "ok": true
+      },
+      {
+        "route": "/",
+        "status": 200,
+        "url": "https://word-steps-grade8-mosaic-unit1.astralrhea17.chatgpt.site/",
+        "ms": 109.1,
+        "bytes": 3773,
+        "contentType": "text/html",
+        "cacheControl": "public, max-age=0, must-revalidate",
+        "cspPresent": false,
+        "loginGate": false,
+        "ok": true
+      },
+      {
+        "route": "/",
+        "status": 200,
+        "url": "https://word-steps-grade8-mosaic-unit1.astralrhea17.chatgpt.site/",
+        "ms": 141.2,
+        "bytes": 3773,
+        "contentType": "text/html",
+        "cacheControl": "public, max-age=0, must-revalidate",
+        "cspPresent": false,
+        "loginGate": false,
+        "ok": true
+      },
+      {
+        "route": "/",
+        "status": 200,
+        "url": "https://word-steps-grade8-mosaic-unit1.astralrhea17.chatgpt.site/",
+        "ms": 115,
+        "bytes": 3773,
+        "contentType": "text/html",
+        "cacheControl": "public, max-age=0, must-revalidate",
+        "cspPresent": false,
+        "loginGate": false,
+        "ok": true
+      },
+      {
+        "route": "/",
+        "status": 200,
+        "url": "https://word-steps-grade8-mosaic-unit1.astralrhea17.chatgpt.site/",
+        "ms": 107.6,
+        "bytes": 3773,
+        "contentType": "text/html",
+        "cacheControl": "public, max-age=0, must-revalidate",
+        "cspPresent": false,
+        "loginGate": false,
+        "ok": true
+      },
+      {
+        "route": "/",
+        "status": 200,
+        "url": "https://word-steps-grade8-mosaic-unit1.astralrhea17.chatgpt.site/",
+        "ms": 152,
+        "bytes": 3773,
+        "contentType": "text/html",
+        "cacheControl": "public, max-age=0, must-revalidate",
+        "cspPresent": false,
+        "loginGate": false,
+        "ok": true
+      },
+      {
+        "route": "/",
+        "status": 200,
+        "url": "https://word-steps-grade8-mosaic-unit1.astralrhea17.chatgpt.site/",
+        "ms": 129.9,
+        "bytes": 3773,
+        "contentType": "text/html",
+        "cacheControl": "public, max-age=0, must-revalidate",
+        "cspPresent": false,
+        "loginGate": false,
+        "ok": true
+      }
+    ]
+  },
+  "note": "17 bounded GET requests. Latency depends on cache and network. Does not establish maximum users, real-device speed, LCP, INP or CLS."
+}

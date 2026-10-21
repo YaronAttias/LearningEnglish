@@ -1,0 +1,11 @@
+{
+  "startedAt": "2026-10-21T11:16:50.061Z",
+  "finishedAt": "2026-10-21T11:16:56.945Z",
+  "tests": 58,
+  "passed": 58,
+  "failed": 0,
+  "skipped": 0,
+  "exitCode": 0,
+  "failures": [],
+  "scope": "Local jsdom functional and delivery tests; not physical-device, browser-engine, real-user or load certification."
+}

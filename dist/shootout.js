@@ -20,5 +20,10 @@
     next.turn=team==='home'?'away':'home';
     return next;
   }
-  return {create,record,goals};
+  function defend(shotCorner,keeperCorner,failedQuestion=false){
+    if(!Number.isInteger(shotCorner)||shotCorner<0||shotCorner>3)throw Error('Invalid shot corner');
+    if(!failedQuestion&&(!Number.isInteger(keeperCorner)||keeperCorner<0||keeperCorner>3))throw Error('Invalid keeper corner');
+    return {goal:failedQuestion||shotCorner!==keeperCorner,stationary:failedQuestion};
+  }
+  return {create,record,goals,defend};
 });

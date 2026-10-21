@@ -14,7 +14,7 @@ function boot({stored,storageBlocked=false,speech=true,confirm=true,shotOutcome=
   let frameTime=0;w.requestAnimationFrame=fn=>{fn(frameTime+=100);return 0;};w.cancelAnimationFrame=()=>{};
   vm.runInContext(fs.readFileSync(path.join(root,'dist/shootout.js'),'utf8'),dom.getInternalVMContext(),{filename:'shootout.js'});
   vm.runInContext(fs.readFileSync(path.join(root,'dist/penalty.js'),'utf8'),dom.getInternalVMContext(),{filename:'penalty.js'});
-  const mount=w.WordPenalty.mount;w.WordPenalty.mount=(host,options)=>mount(host,{...options,noCanvas:true,instant:true,shotOutcome});
+  const mount=w.WordPenalty.mount;w.WordPenalty.mount=(host,options)=>mount(host,{...options,noCanvas:true,instant:true,shotOutcome,opponentAim:i=>shotOutcome('away',i)?0:1});
   vm.runInContext(fs.readFileSync(path.join(root,'dist/words.js'),'utf8'),dom.getInternalVMContext(),{filename:'words.js'});
   vm.runInContext(fs.readFileSync(path.join(root,'dist/app.js'),'utf8'),dom.getInternalVMContext(),{filename:'app.js'});
   const $=s=>w.document.querySelector(s), all=s=>[...w.document.querySelectorAll(s)];

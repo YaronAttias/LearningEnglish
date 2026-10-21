@@ -1,5 +1,6 @@
 const {test}=require('node:test'),assert=require('node:assert/strict');
 const R=require('../dist/shootout.js');
+test('DEFENSE-RULES: all sixteen corner combinations and all four forced-concession cases',()=>{for(let shot=0;shot<4;shot++){for(let keeper=0;keeper<4;keeper++)assert.deepEqual(R.defend(shot,keeper),{goal:shot!==keeper,stationary:false});assert.deepEqual(R.defend(shot,null,true),{goal:true,stationary:true});}assert.throws(()=>R.defend(-1,0));assert.throws(()=>R.defend(0,null));});
 function play(results,first='home'){let s=R.create(first);for(const result of results)s=R.record(s,s.turn,result);return s;}
 test('RULES-01: a goal credits only the kicking team; a miss credits nobody',()=>{let s=R.create();s=R.record(s,'home',true);assert.equal(R.goals(s.home),1);assert.equal(R.goals(s.away),0);s=R.record(s,'away',false);assert.equal(R.goals(s.home),1);assert.equal(R.goals(s.away),0);assert.equal(s.home.length,1);assert.equal(s.away.length,1);});
 test('RULES-02: all four paired outcomes score correctly',()=>{for(const a of [false,true])for(const b of [false,true]){const s=play([a,b]);assert.equal(R.goals(s.home),Number(a));assert.equal(R.goals(s.away),Number(b));assert.equal(s.winner,null);assert.equal(s.turn,'home');}});

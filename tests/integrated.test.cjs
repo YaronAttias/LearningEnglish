@@ -1,4 +1,41 @@
 const {test}=require('node:test');const assert=require('node:assert/strict');const {boot}=require('./helpers.cjs');
+test('FOCUS-SNAPSHOT: one focused word stays the only question through sudden death',()=>{
+  const a=boot({stored:{stats:{abroad:{checked:true,focus:true}}},shotOutcome:(team,i)=>team==='home'||i<5});
+  try{
+    a.filter('focus');begin(a);
+    for(let turn=0;turn<12;turn++){
+      assert.equal(a.w.eval('mission[step].w.en'),'abroad');
+      right(a).click();a.click('.target.t1');a.click('#pa-arena .kick');
+    }
+    assert.equal(a.state().game.missions,1);
+    assert.deepEqual(Object.keys(a.state().stats),['abroad']);
+    assert.equal(a.state().game.xp,25);
+    a.click('#pa-arena .kick');assert.match(a.$('#stage').textContent,/אין מילים/);
+  }finally{a.close();}
+});
+test('SHUFFLE-GAME: shuffle cannot reset a match and is restored for learning',()=>{
+  const a=boot();
+  try{
+    begin(a);const arena=a.$('#pa-arena');
+    for(const phase of ['question','aim','result']){
+      if(phase==='aim')right(a).click();
+      if(phase==='result')a.click('.target.t1');
+      assert.equal(a.$('#shuffle').disabled,true);a.click('#shuffle');
+      assert.equal(a.$('#pa-arena'),arena);
+      assert.equal(arena.dataset.phase,phase);
+    }
+    assert.equal(a.$('[data-score="home"]').textContent,'1');
+    a.mode(0);assert.equal(a.$('#shuffle').disabled,false);
+    a.click('#shuffle');assert.ok(a.$('.word'));
+  }finally{a.close();}
+});
+scenario('FOCUS-REMOVE-GAME: removing a focus marker preserves the active arena',a=>{
+  a.filter('focus');begin(a);const arena=a.$('#pa-arena');
+  a.click('[data-remove-focus="abroad"]');
+  assert.equal(a.$('#pa-arena'),arena);right(a).click();
+  a.click('.target.t1');a.click('#pa-arena .kick');
+  assert.equal(a.w.eval('mission[step].w.en'),'abroad');
+},{stored:{stats:{abroad:{checked:true,focus:true}}}});
 function scenario(name,run,options){test(name,()=>{const a=boot(options);try{run(a);}finally{a.close();}});}
 function begin(a){a.mode(4);a.all('#pa-arena .kick')[0]?.click();}
 function right(a){const s=a.w.eval('mission[step]');const value=s.type===3?s.w.en:s.w.he;return a.all('[data-penalty-choice]').find(b=>b.textContent===value);}

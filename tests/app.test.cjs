@@ -1,4 +1,30 @@
 const {test}=require('node:test');const assert=require('node:assert/strict');const {boot,KEY}=require('./helpers.cjs');
+scenario('SECURITY-STATS: prototype-like word names keep independent progress after reload',a=>{
+  a.importText('__proto__ | מיוחד\nconstructor | בנאי\ntoString | טקסט');
+  a.mode(1);
+  for(const name of ['__proto__','constructor','toString']){
+    a.submit('wrong');a.submit(name);
+    assert.equal(a.w.eval('Object.hasOwn(Object.prototype,"focus")'),false);
+    assert.equal(a.state().stats[name].attempts,2);
+    a.click('#continue');
+  }
+  const stored=a.state();assert.equal(stored.game.xp,30);
+  const b=boot({stored});
+  try{
+    assert.equal(b.w.eval('Object.getPrototypeOf(stats) === null'),true);
+    b.mode(1);b.submit('__proto__');
+    assert.equal(b.state().stats.__proto__.attempts,3);
+    assert.equal(b.state().stats.constructor.attempts,2);
+    assert.equal(b.state().stats.toString.attempts,2);
+    assert.equal(b.state().game.xp,30);
+    assert.equal(b.w.eval('Object.hasOwn(Object.prototype,"checked")'),false);
+  }finally{b.close();}
+  for(const id of ['reset','restore']){
+    a.click('#'+id);
+    assert.equal(a.w.eval('Object.getPrototypeOf(stats) === null'),true);
+    assert.deepEqual(a.state().stats,{});
+  }
+});
 function scenario(name,run,options){test(name,()=>{const a=boot(options);try{run(a);}finally{a.close();}});}
 scenario('CONTENT-01: 58 unique words, 46 core and 12 EXTRA',a=>{assert.equal(a.$('#count').textContent,'58');const rows=a.all('.word-row');assert.equal(rows.length,58);assert.equal(new Set(rows.map(r=>r.querySelector('button').textContent)).size,58);assert.equal(a.all('.word-row small').length,12);});
 scenario('LEARN-01: first word, Hebrew meaning and accessible picture',a=>{assert.equal(a.$('.word').textContent,'abroad');assert.equal(a.$('.meaning').textContent,'בחוץ לארץ');assert.match(a.$('[role="img"]').getAttribute('aria-label'),/abroad/);assert.ok(a.$('#prev').disabled);});

@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-25",
+  "passed": 11,
+  "checks": [
+    "Closed on initial load",
+    "Open button and background scroll-lock class",
+    "Interior click keeps dialog open",
+    "Close button restores focus and scroll class",
+    "Continue button closes",
+    "Outside-panel click closes",
+    "Profile links and safe new-tab attributes",
+    "No email in footer or dialog",
+    "Learning storage unchanged by About interactions",
+    "Card navigation still works",
+    "Speech requests still work"
+  ],
+  "limits": [
+    "Native browser verification blocked by file URL security policy.",
+    "Dialog API simulated in jsdom; Escape, native focus containment, actual layout, mobile scrolling and audible output are not verified."
+  ]
+}

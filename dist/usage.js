@@ -17,10 +17,14 @@
     return fetch('/api/usage/' + path, {method:data === undefined ? 'GET':'POST', credentials:'same-origin', cache:'no-store',
       headers:data === undefined ? {} : {'Content-Type':'application/json'}, body:data === undefined ? undefined : JSON.stringify(data), keepalive:true});
   }
+  function optedOut() {
+    if (stopped) return true;
+    try { return localStorage.getItem(OFF) === '1'; } catch { return false; }
+  }
   function disable() { state.enabled = false; state.pending = null; state.activeMs = state.answers = state.completed = 0; forget.hidden = true; }
   async function flush() {
     accrue();
-    if (!state.enabled || state.sending) return;
+    if (optedOut() || !state.enabled || state.sending) return;
     if (!state.pending && (state.activeMs >= 1000 || state.answers || state.completed)) {
       state.pending = {id:crypto.randomUUID(), activeMs:Math.floor(state.activeMs), answers:state.answers, completed:state.completed};
       state.activeMs = state.answers = state.completed = 0;
@@ -68,9 +72,12 @@
       }
       // Serialize first-start storage across tabs when Web Locks are available.
       const value = navigator.locks?.request ? await navigator.locks.request(SEED,seed) : seed();
+      if (optedOut()) { disable(); stopped = true; return; }
       const result = await api('start', {seed:value});
       if (!result.ok) throw new Error();
-      if ((await result.json()).enabled) {
+      const data = await result.json();
+      if (optedOut()) { disable(); stopped = true; return; }
+      if (data.enabled) {
         state.enabled = true; state.eligible = eligible(); state.last = performance.now();
         notice.textContent = 'מדידת שימוש אנונימית · מזהה אקראי לדפדפן, זמן פעיל ומספר תשובות וסיומי תרגול. ללא תוכן התשובות.';
         forget.hidden = false;

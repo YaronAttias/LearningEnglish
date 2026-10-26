@@ -49,11 +49,12 @@
     const chart = $('activity-chart'); chart.replaceChildren();
     const values = new Map(daily.map(d => [d.day,Number(d.active_ms)]));
     const dayFormat = new Intl.DateTimeFormat('en-CA', {timeZone:'Asia/Jerusalem',year:'numeric',month:'2-digit',day:'2-digit'});
+    const today = new Date(dayFormat.format(Date.now()) + 'T00:00:00Z');
     // Seven-day chart stays legible; longer periods use chronological weekly bins.
     const bins = [], width = days === 7 ? 1 : days === 30 ? 5 : 15;
     for (let offset = days - 1; offset >= 0; offset -= width) {
       let total = 0, first;
-      for (let i=0;i<width && offset-i>=0;i++) { const day = dayFormat.format(Date.now()-(offset-i)*86400000); if (!first) first=day; total += values.get(day)||0; }
+      for (let i=0;i<width && offset-i>=0;i++) { const calendar = new Date(today); calendar.setUTCDate(calendar.getUTCDate() - (offset-i)); const day = calendar.toISOString().slice(0,10); if (!first) first=day; total += values.get(day)||0; }
       bins.push({label:first.slice(8) + '.' + first.slice(5,7), total});
     }
     const max = Math.max(60000,...bins.map(b => b.total));

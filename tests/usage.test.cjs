@@ -246,3 +246,83 @@ test('USAGE production artifact: real assets, protected admin aliases, no source
     const png=await call('/images/vocabulary-atlas.png');assert.equal((await png.arrayBuffer()).byteLength,3149232);
   }finally{f.close();}
 });
+
+test('USAGE opt-out: late start cookies cannot override independent server preference',async()=>{
+  const f=await fixture();try{
+    const s=await f.enroll();
+    const lateStart=await f.call('/api/usage/start',{method:'POST',data:{seed:s.seed},cookie:s.cookie});
+    const stopped=await f.call('/api/usage/forget',{method:'POST',data:{},cookie:s.cookie});
+    const off=stopped.headers.get('Set-Cookie').split(';')[0];
+    assert.match(off,/^__Host-wl-usage-off=off$/);
+    const combined=off+'; '+lateStart.headers.get('Set-Cookie').split(';')[0];
+    assert.deepEqual(await (await f.call('/api/usage/status',{cookie:combined})).json(),{enabled:false});
+    const restart=await f.call('/api/usage/start',{method:'POST',data:{seed:s.seed},cookie:combined});
+    assert.deepEqual(await restart.json(),{enabled:false});assert.equal(restart.headers.get('Set-Cookie'),null);
+    assert.equal((await f.call('/api/usage/report',{method:'POST',cookie:combined,data:report()})).status,403);
+    assert.equal(f.env.DB.raw.prepare('SELECT COUNT(*) AS n FROM daily_usage').get().n,0);
+  }finally{f.close();}
+});
+
+test('USAGE opt-out: delayed start response or JSON cannot re-enable another tab',async()=>{
+ const {JSDOM}=require('jsdom');
+ for(const stage of ['response','json']){
+  const dom=new JSDOM('<footer></footer>',{url:origin,runScripts:'outside-only'}),w=dom.window;
+  let release,now=0,focused=true;const sent=[],intervals=[];
+  Object.defineProperty(w.performance,'now',{value:()=>now});
+  Object.defineProperty(w.document,'visibilityState',{get:()=>'visible'});w.document.hasFocus=()=>focused;
+  w.crypto.randomUUID=crypto.randomUUID.bind(crypto);w.setInterval=fn=>intervals.push(fn);
+  const pending=new Promise(resolve=>release=resolve);
+  const response={ok:true,status:200,json:()=>stage==='json'?pending:Promise.resolve({enabled:true})};
+  w.fetch=async url=>{sent.push(url);return url.endsWith('/start')?(stage==='response'?pending:response):{ok:true,status:200,json:async()=>({})};};
+  const settle=async()=>{for(let i=0;i<15;i++)await Promise.resolve();};
+  try{
+   w.eval(fs.readFileSync(path.join(__dirname,'../dist/usage.js'),'utf8'));await settle();w.WordUsage.answer();
+   w.localStorage.setItem('wordleague-usage-off','1');w.dispatchEvent(new w.StorageEvent('storage',{key:'wordleague-usage-off',newValue:'1'}));
+   release(stage==='response'?response:{enabled:true});await settle();
+   assert.equal(w.document.querySelector('footer button').hidden,true);
+   now=15000;focused=false;w.dispatchEvent(new w.Event('blur'));intervals[0]();w.WordUsage.answer();await settle();
+   assert.deepEqual(sent,['/api/usage/start']);
+  }finally{w.close();}
+ }
+});
+
+test('USAGE calendar: chart uses distinct calendar dates and exact totals across both DST transitions',async()=>{
+ const {JSDOM}=require('jsdom');
+ for(const [instant,today] of [['2026-10-26T23:30:00+02:00','2026-10-26'],['2026-03-28T00:30:00+03:00','2026-03-28']]){
+  for(const days of [7,30,90]){
+   const dom=new JSDOM(fs.readFileSync(path.join(__dirname,'../dist/admin.html'),'utf8'),{url:origin+'/admin',runScripts:'outside-only'}),w=dom.window;
+   w.Date.now=()=>Date.parse(instant);
+   const daily=Array.from({length:days},(_,i)=>({day:new Date(Date.parse(today+'T00:00:00Z')-i*86400000).toISOString().slice(0,10),active_ms:(i+1)*60000}));
+   w.fetch=async()=>({ok:true,status:200,json:async()=>({students:[],days,daily})});
+   try{
+    w.eval(fs.readFileSync(path.join(__dirname,'../dist/admin.js'),'utf8'));for(let i=0;i<15;i++)await Promise.resolve();
+    const columns=[...w.document.querySelectorAll('.day-column')];
+    assert.equal(columns.length,days===7?7:6);
+    assert.equal(columns.reduce((sum,col)=>sum+Number(col.querySelector('.day-value').textContent),0),days*(days+1)/2);
+    if(days===7){assert.equal(new Set(columns.map(c=>c.lastElementChild.textContent)).size,7);assert.equal(columns.at(-1).lastElementChild.textContent,today.slice(8)+'.'+today.slice(5,7));}
+   }finally{w.close();}
+  }
+ }
+});
+
+test('USAGE calendar: API period and retention use calendar days at DST boundaries',async()=>{
+ for(const [instant,today] of [['2026-10-26T23:30:00+02:00','2026-10-26'],['2026-03-28T00:30:00+03:00','2026-03-28']]){
+  const f=await fixture(),original=Date.now;Date.now=()=>Date.parse(instant);
+  const day=offset=>new Date(Date.parse(today+'T00:00:00Z')+offset*86400000).toISOString().slice(0,10);
+  try{
+   const s=await f.enroll();
+   for(const offset of [-90,-89,-30,-29,-7,-6,0])f.env.DB.raw.prepare('INSERT INTO daily_usage VALUES (?, ?, 60000, 1, 0)').run(s.id,day(offset));
+   for(const [days,count]of [[7,2],[30,4],[90,6]]){
+    const data=await (await f.call('/api/admin/students?days='+days,{admin:true})).json();
+    assert.equal(data.daily.length,count);assert.equal(data.students[0].active_ms,count*60000);
+   }
+   assert.equal(f.env.DB.raw.prepare('SELECT COUNT(*) AS n FROM daily_usage WHERE day = ?').get(day(-90)).n,0);
+   assert.equal(f.env.DB.raw.prepare('SELECT COUNT(*) AS n FROM daily_usage WHERE day = ?').get(day(-89)).n,1);
+   // Exercise retention on the reporting path, independently of opening admin.
+   f.env.DB.raw.prepare('INSERT INTO daily_usage VALUES (?, ?, 60000, 1, 0)').run(s.id,day(-90));
+   assert.equal((await f.call('/api/usage/report',{method:'POST',cookie:s.cookie,data:report()})).status,200);
+   assert.equal(f.env.DB.raw.prepare('SELECT COUNT(*) AS n FROM daily_usage WHERE day = ?').get(day(-90)).n,0);
+   assert.equal(f.env.DB.raw.prepare('SELECT COUNT(*) AS n FROM daily_usage WHERE day = ?').get(day(-89)).n,1);
+  }finally{Date.now=original;f.close();}
+ }
+});

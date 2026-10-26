@@ -1,1 +1,8 @@
 node_modules/
+dist/server/
+dist/.openai/
+outputs/
+.sites-runtime/
+.env*
+.dev.vars*
+tests/.usage-preview.sqlite*

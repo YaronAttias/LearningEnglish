@@ -4,9 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node tests/run.cjs",
+    "test": "node scripts/build-worker.cjs && node tests/run.cjs",
     "test:live": "node tests/live-smoke.cjs",
-    "test:serve": "node tests/serve.cjs"
+    "test:serve": "node tests/serve.cjs",
+    "build": "node scripts/build-worker.cjs",
+    "test:usage": "node scripts/build-worker.cjs && node --test tests/usage.test.cjs",
+    "dev:usage": "node tests/usage-server.cjs"
   },
   "keywords": [],
   "author": "",

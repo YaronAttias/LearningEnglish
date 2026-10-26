@@ -7,655 +7,661 @@ TAP version 13
 # Subtest: SECURITY-STATS: prototype-like word names keep independent progress after reload
 ok 1 - SECURITY-STATS: prototype-like word names keep independent progress after reload
   ---
-  duration_ms: 207.3098
+  duration_ms: 201.4961
   type: 'test'
   ...
 # Subtest: CONTENT-01: 58 unique words, 46 core and 12 EXTRA
 ok 2 - CONTENT-01: 58 unique words, 46 core and 12 EXTRA
   ---
-  duration_ms: 28.331
+  duration_ms: 24.7751
   type: 'test'
   ...
 # Subtest: LEARN-01: first word, Hebrew meaning and accessible picture
 ok 3 - LEARN-01: first word, Hebrew meaning and accessible picture
   ---
-  duration_ms: 22.7696
+  duration_ms: 26.733
   type: 'test'
   ...
 # Subtest: LEARN-02: next, previous and wrap around
 ok 4 - LEARN-02: next, previous and wrap around
   ---
-  duration_ms: 229.8782
+  duration_ms: 235.6981
   type: 'test'
   ...
 # Subtest: IMAGES-01: all 58 cards have distinct valid crop rectangles
 ok 5 - IMAGES-01: all 58 cards have distinct valid crop rectangles
   ---
-  duration_ms: 196.0161
+  duration_ms: 258.1693
   type: 'test'
   ...
 # Subtest: AUDIO-01: hearing a word requests English speech at learning speed
 ok 6 - AUDIO-01: hearing a word requests English speech at learning speed
   ---
-  duration_ms: 20.9462
+  duration_ms: 29.1426
   type: 'test'
   ...
 # Subtest: AUDIO-02: unavailable speech shows a useful message
 ok 7 - AUDIO-02: unavailable speech shows a useful message
   ---
-  duration_ms: 19.0915
+  duration_ms: 34.2716
   type: 'test'
   ...
 # Subtest: FILTER-01: core has 46 words and EXTRA has 12
 ok 8 - FILTER-01: core has 46 words and EXTRA has 12
   ---
-  duration_ms: 25.8925
+  duration_ms: 47.1664
   type: 'test'
   ...
 # Subtest: FILTER-02: no focus words gives an empty state
 ok 9 - FILTER-02: no focus words gives an empty state
   ---
-  duration_ms: 23.5339
+  duration_ms: 41.5617
   type: 'test'
   ...
 # Subtest: WRITE-01: empty answer does not count as an attempt
 ok 10 - WRITE-01: empty answer does not count as an attempt
   ---
-  duration_ms: 25.0844
+  duration_ms: 42.0798
   type: 'test'
   ...
 # Subtest: WRITE-02: case and surrounding spaces are accepted
 ok 11 - WRITE-02: case and surrounding spaces are accepted
   ---
-  duration_ms: 31.9544
+  duration_ms: 60.8789
   type: 'test'
   ...
 # Subtest: WRITE-03: curly apostrophe is normalized
 ok 12 - WRITE-03: curly apostrophe is normalized
   ---
-  duration_ms: 123.0792
+  duration_ms: 220.7914
   type: 'test'
   ...
 # Subtest: WRITE-04: wrong answer creates a focus word and retry succeeds
 ok 13 - WRITE-04: wrong answer creates a focus word and retry succeeds
   ---
-  duration_ms: 45.2628
+  duration_ms: 74.921
   type: 'test'
   ...
 # Subtest: WRITE-05: reveal counts as needing practice
 ok 14 - WRITE-05: reveal counts as needing practice
   ---
-  duration_ms: 27.0615
+  duration_ms: 44.0771
   type: 'test'
   ...
 # Subtest: WRITE-06: double submission cannot double count after success
 ok 15 - WRITE-06: double submission cannot double count after success
   ---
-  duration_ms: 27.9507
+  duration_ms: 43.0549
   type: 'test'
   ...
 # Subtest: MEANING-01: 4 distinct choices include the correct answer
 ok 16 - MEANING-01: 4 distinct choices include the correct answer
   ---
-  duration_ms: 22.065
+  duration_ms: 35.552
   type: 'test'
   ...
 # Subtest: MEANING-02: correct choice provides success and next
 ok 17 - MEANING-02: correct choice provides success and next
   ---
-  duration_ms: 32.8398
+  duration_ms: 54.0443
   type: 'test'
   ...
 # Subtest: FOCUS-01: individual removal preserves another word and attempt history
 ok 18 - FOCUS-01: individual removal preserves another word and attempt history
   ---
-  duration_ms: 42.1028
+  duration_ms: 67.3969
   type: 'test'
   ...
 # Subtest: FOCUS-02: removing the last focused card handles empty state
 ok 19 - FOCUS-02: removing the last focused card handles empty state
   ---
-  duration_ms: 36.1553
+  duration_ms: 116.3907
   type: 'test'
   ...
 # Subtest: STORAGE-01: independent users have independent progress
 ok 20 - STORAGE-01: independent users have independent progress
   ---
-  duration_ms: 49.0109
+  duration_ms: 188.9528
   type: 'test'
   ...
 # Subtest: STORAGE-02: progress survives a reload with the same saved data
 ok 21 - STORAGE-02: progress survives a reload with the same saved data
   ---
-  duration_ms: 42.7938
+  duration_ms: 163.6992
   type: 'test'
   ...
 # Subtest: STORAGE-03: malformed JSON falls back to default content
 ok 22 - STORAGE-03: malformed JSON falls back to default content
   ---
-  duration_ms: 17.2268
+  duration_ms: 52.6727
   type: 'test'
   ...
 # Subtest: STORAGE-04: blocked storage does not prevent practice
 ok 23 - STORAGE-04: blocked storage does not prevent practice
   ---
-  duration_ms: 30.7813
+  duration_ms: 77.4847
   type: 'test'
   ...
 # Subtest: RESET-01: cancel leaves progress unchanged
 ok 24 - RESET-01: cancel leaves progress unchanged
   ---
-  duration_ms: 27.296
+  duration_ms: 95.6221
   type: 'test'
   ...
 # Subtest: RESET-02: accepted reset clears progress but retains content
 ok 25 - RESET-02: accepted reset clears progress but retains content
   ---
-  duration_ms: 32.0627
+  duration_ms: 111.2553
   type: 'test'
   ...
 # Subtest: IMPORT-01: simple list replaces content and clears old progress
 ok 26 - IMPORT-01: simple list replaces content and clears old progress
   ---
-  duration_ms: 33.0319
+  duration_ms: 85.5472
   type: 'test'
   ...
 # Subtest: IMPORT-02: invalid, empty, duplicate and invalid-cloze lists are rejected
 ok 27 - IMPORT-02: invalid, empty, duplicate and invalid-cloze lists are rejected
   ---
-  duration_ms: 17.5955
+  duration_ms: 80.9633
   type: 'test'
   ...
 # Subtest: IMPORT-03: full format supports EXTRA and sentence practice
 ok 28 - IMPORT-03: full format supports EXTRA and sentence practice
   ---
-  duration_ms: 21.817
+  duration_ms: 90.17
   type: 'test'
   ...
 # Subtest: SECURITY-01: imported HTML remains text instead of executing
 ok 29 - SECURITY-01: imported HTML remains text instead of executing
   ---
-  duration_ms: 20.6401
+  duration_ms: 92.8125
   type: 'test'
   ...
 # Subtest: SENTENCE-01: all original examples contain a usable blank
 ok 30 - SENTENCE-01: all original examples contain a usable blank
   ---
-  duration_ms: 25.6081
+  duration_ms: 87.9721
   type: 'test'
   ...
 # Subtest: RESTORE-01: original words and illustrations can be restored
 ok 31 - RESTORE-01: original words and illustrations can be restored
   ---
-  duration_ms: 26.6356
+  duration_ms: 75.6588
   type: 'test'
   ...
 # Subtest: ROUND-01: single-word round ends and can restart
 ok 32 - ROUND-01: single-word round ends and can restart
   ---
-  duration_ms: 22.084
+  duration_ms: 111.9408
   type: 'test'
   ...
 # Subtest: A11Y-01: direction, form labels, live feedback and pressed mode are present
 ok 33 - A11Y-01: direction, form labels, live feedback and pressed mode are present
   ---
-  duration_ms: 21.5415
+  duration_ms: 68.55
   type: 'test'
   ...
 # Subtest: EXPORT-01: text download preserves 58 entries, Hebrew and EXTRA
 ok 34 - EXPORT-01: text download preserves 58 entries, Hebrew and EXTRA
   ---
-  duration_ms: 18.5507
+  duration_ms: 60.6887
   type: 'test'
   ...
 # Subtest: IMPORT-04: cancellation preserves content and progress
 ok 35 - IMPORT-04: cancellation preserves content and progress
   ---
-  duration_ms: 31.2439
+  duration_ms: 96.6765
   type: 'test'
   ...
 # Subtest: ROBUSTNESS-01: valid JSON with corrupt word records must recover safely
 ok 36 - ROBUSTNESS-01: valid JSON with corrupt word records must recover safely
   ---
-  duration_ms: 17.6521
+  duration_ms: 71.0634
   type: 'test'
   ...
 # Subtest: ROBUSTNESS-02: nonnumeric saved attempt count must not corrupt progress
 ok 37 - ROBUSTNESS-02: nonnumeric saved attempt count must not corrupt progress
   ---
-  duration_ms: 25.1432
+  duration_ms: 75.7673
   type: 'test'
   ...
 # PERF_ASSET_BYTES=3235152
-# PERF_DOM_STARTUP_MS=164.92
-# PERF_58_CARDS_MS=339.69
+# PERF_DOM_STARTUP_MS=614.50
+# PERF_58_CARDS_MS=2182.49
 # Subtest: DELIVERY-01: deployment identity and entrypoint match
 ok 38 - DELIVERY-01: deployment identity and entrypoint match
   ---
-  duration_ms: 2.5452
+  duration_ms: 8.4765
   type: 'test'
   ...
 # Subtest: DELIVERY-02: all linked local scripts, stylesheet and picture exist
 ok 39 - DELIVERY-02: all linked local scripts, stylesheet and picture exist
   ---
-  duration_ms: 2.5417
+  duration_ms: 6.5129
   type: 'test'
   ...
 # Subtest: DELIVERY-03: atlas has the expected actual image dimensions
 ok 40 - DELIVERY-03: atlas has the expected actual image dimensions
   ---
-  duration_ms: 4.8557
+  duration_ms: 7.6793
   type: 'test'
   ...
 # Subtest: SECURITY-02: deployed directory contains no credential or configuration files
 ok 41 - SECURITY-02: deployed directory contains no credential or configuration files
   ---
-  duration_ms: 19.359
+  duration_ms: 51.8755
   type: 'test'
   ...
 # Subtest: MOBILE-01: viewport and narrow-screen layout rules are shipped
 ok 42 - MOBILE-01: viewport and narrow-screen layout rules are shipped
   ---
-  duration_ms: 1.1605
+  duration_ms: 3.6183
   type: 'test'
   ...
 # Subtest: PERF-01: initial uncompressed application assets stay below 4 MiB
 ok 43 - PERF-01: initial uncompressed application assets stay below 4 MiB
   ---
-  duration_ms: 2.7356
+  duration_ms: 11.1098
   type: 'test'
   ...
 # Subtest: PERF-02: application startup stays below 1500 ms in local DOM harness
 ok 44 - PERF-02: application startup stays below 1500 ms in local DOM harness
   ---
-  duration_ms: 166.1322
+  duration_ms: 617.3452
   type: 'test'
   ...
 # Subtest: PERF-03: 58-card navigation stays below 5000 ms in local DOM harness
 ok 45 - PERF-03: 58-card navigation stays below 5000 ms in local DOM harness
   ---
-  duration_ms: 389.8899
+  duration_ms: 2356.3151
   type: 'test'
   ...
 # Subtest: FOCUS-SNAPSHOT: one focused word stays the only question through sudden death
 ok 46 - FOCUS-SNAPSHOT: one focused word stays the only question through sudden death
   ---
-  duration_ms: 499.8658
+  duration_ms: 592.2352
   type: 'test'
   ...
 # Subtest: SHUFFLE-GAME: shuffle cannot reset a match and is restored for learning
 ok 47 - SHUFFLE-GAME: shuffle cannot reset a match and is restored for learning
   ---
-  duration_ms: 87.6371
+  duration_ms: 94.7168
   type: 'test'
   ...
 # Subtest: FOCUS-REMOVE-GAME: removing a focus marker preserves the active arena
 ok 48 - FOCUS-REMOVE-GAME: removing a focus marker preserves the active arena
   ---
-  duration_ms: 92.4868
+  duration_ms: 153.6459
   type: 'test'
   ...
 # Subtest: INTEGRATED-01: ten attack and defense answers reward learning and persist after reload
 ok 49 - INTEGRATED-01: ten attack and defense answers reward learning and persist after reload
   ---
-  duration_ms: 246.5634
+  duration_ms: 360.3249
   type: 'test'
   ...
 # Subtest: ADAPTIVE-01: weak words precede future reviews and wrong retry stays weak
 ok 50 - ADAPTIVE-01: weak words precede future reviews and wrong retry stays weak
   ---
-  duration_ms: 61.2811
+  duration_ms: 101.4932
   type: 'test'
   ...
 # Subtest: ADAPTIVE-02: 70 translation / 30 cloze across two complete missions
 ok 51 - ADAPTIVE-02: 70 translation / 30 cloze across two complete missions
   ---
-  duration_ms: 201.4862
+  duration_ms: 307.7957
   type: 'test'
   ...
 # Subtest: ADAPTIVE-03: correct answers schedule spaced review and double clicks award once
 ok 52 - ADAPTIVE-03: correct answers schedule spaced review and double clicks award once
   ---
-  duration_ms: 58.3346
+  duration_ms: 83.1833
   type: 'test'
   ...
 # Subtest: GAME-01: same word on the same day earns no repeated word XP
 ok 53 - GAME-01: same word on the same day earns no repeated word XP
   ---
-  duration_ms: 58.8429
+  duration_ms: 89.2936
   type: 'test'
   ...
 # Subtest: PENALTY-01: two errors count as a miss and reveal the answer, with no reward
 ok 54 - PENALTY-01: two errors count as a miss and reveal the answer, with no reward
   ---
-  duration_ms: 64.4207
+  duration_ms: 118.7668
   type: 'test'
   ...
 # Subtest: GAME-03: accepted reset clears game and learning state together
 ok 55 - GAME-03: accepted reset clears game and learning state together
   ---
-  duration_ms: 65.9816
+  duration_ms: 111.7787
   type: 'test'
   ...
 # Subtest: FEED-01: keyboard advances only focused learning card
 ok 56 - FEED-01: keyboard advances only focused learning card
   ---
-  duration_ms: 40.7792
+  duration_ms: 70.4119
   type: 'test'
   ...
 # Subtest: CONTENT-02: 58 bilingual sentences, exact cloze substitutions and EXTRA coverage
 ok 57 - CONTENT-02: 58 bilingual sentences, exact cloze substitutions and EXTRA coverage
   ---
-  duration_ms: 27.9665
+  duration_ms: 61.3137
   type: 'test'
   ...
 # Subtest: STORAGE-05: malformed game and stats fields do not break a mission
 ok 58 - STORAGE-05: malformed game and stats fields do not break a mission
   ---
-  duration_ms: 71.2364
+  duration_ms: 73.7048
   type: 'test'
   ...
 # Subtest: ADAPTIVE-04: one-word lists still play a standard shootout with five alternating pairs
 ok 59 - ADAPTIVE-04: one-word lists still play a standard shootout with five alternating pairs
   ---
-  duration_ms: 115.2268
+  duration_ms: 200.9364
   type: 'test'
   ...
 # Subtest: MIGRATION-01: previous default saved list gains examples without losing progress
 ok 60 - MIGRATION-01: previous default saved list gains examples without losing progress
   ---
-  duration_ms: 21.5745
+  duration_ms: 33.9934
   type: 'test'
   ...
 # Subtest: GAME-04: levels and remaining achievement conditions unlock together
 ok 61 - GAME-04: levels and remaining achievement conditions unlock together
   ---
-  duration_ms: 39.5794
+  duration_ms: 66.2932
   type: 'test'
   ...
 # Subtest: FEED-02: upward touch gesture advances a learning card
 ok 62 - FEED-02: upward touch gesture advances a learning card
   ---
-  duration_ms: 32.4737
+  duration_ms: 48.5278
   type: 'test'
   ...
 # Subtest: PENALTY-02: defense cloze hides target and offers English answers
 ok 63 - PENALTY-02: defense cloze hides target and offers English answers
   ---
-  duration_ms: 79.1478
+  duration_ms: 124.929
   type: 'test'
   ...
 # Subtest: PENALTY-03: leaving during a shot cannot award a completed match
 ok 64 - PENALTY-03: leaving during a shot cannot award a completed match
   ---
-  duration_ms: 47.6026
+  duration_ms: 89.5393
   type: 'test'
   ...
 # Subtest: PENALTY-04: attack and defense each require a question; a corner click immediately acts
 ok 65 - PENALTY-04: attack and defense each require a question; a corner click immediately acts
   ---
-  duration_ms: 59.6172
+  duration_ms: 101.7119
   type: 'test'
   ...
 # Subtest: PENALTY-05: two learning errors never grant the opponent a goal
 ok 66 - PENALTY-05: two learning errors never grant the opponent a goal
   ---
-  duration_ms: 59.3022
+  duration_ms: 71.0389
   type: 'test'
   ...
 # Subtest: PENALTY-06: early 3–0 win rewards six attack/defense answers exactly once
 ok 67 - PENALTY-06: early 3–0 win rewards six attack/defense answers exactly once
   ---
-  duration_ms: 111.0292
+  duration_ms: 153.8591
   type: 'test'
   ...
 # Subtest: PENALTY-07: sudden death also asks attack and defense questions before deciding
 ok 68 - PENALTY-07: sudden death also asks attack and defense questions before deciding
   ---
-  duration_ms: 178.2294
+  duration_ms: 307.127
   type: 'test'
   ...
 # Subtest: PENALTY-08: clinching attack does not ask an unnecessary defense question
 ok 69 - PENALTY-08: clinching attack does not ask an unnecessary defense question
   ---
-  duration_ms: 118.0665
+  duration_ms: 168.4388
   type: 'test'
   ...
 # Subtest: DEFENSE-01: matching corner saves immediately; duplicate corner clicks cannot repeat it
 ok 70 - DEFENSE-01: matching corner saves immediately; duplicate corner clicks cannot repeat it
   ---
-  duration_ms: 63.4908
+  duration_ms: 77.0575
   type: 'test'
   ...
 # Subtest: DEFENSE-02: different corner concedes exactly one opponent goal
 ok 71 - DEFENSE-02: different corner concedes exactly one opponent goal
   ---
-  duration_ms: 57.9461
+  duration_ms: 69.893
   type: 'test'
   ...
 # Subtest: DEFENSE-03: two errors force a stationary keeper, goal, answer reveal and no word reward
 ok 72 - DEFENSE-03: two errors force a stationary keeper, goal, answer reveal and no word reward
   ---
-  duration_ms: 69.5818
+  duration_ms: 82.0416
   type: 'test'
   ...
 # Subtest: DEFENSE-04: retry success permits saving and keeps the word marked for review
 ok 73 - DEFENSE-04: retry success permits saving and keeps the word marked for review
   ---
-  duration_ms: 70.8101
+  duration_ms: 75.4245
   type: 'test'
   ...
 # Subtest: FOCUS-PENALTY: attack type 2 updates immediately, survives repeated correct answer and reload
 ok 74 - FOCUS-PENALTY: attack type 2 updates immediately, survives repeated correct answer and reload
   ---
-  duration_ms: 81.3926
+  duration_ms: 77.7456
   type: 'test'
   ...
 # Subtest: FOCUS-PENALTY: attack type 3 updates immediately, survives repeated correct answer and reload
 ok 75 - FOCUS-PENALTY: attack type 3 updates immediately, survives repeated correct answer and reload
   ---
-  duration_ms: 72.2813
+  duration_ms: 73.0758
   type: 'test'
   ...
 # Subtest: FOCUS-PENALTY: defend type 2 updates immediately, survives repeated correct answer and reload
 ok 76 - FOCUS-PENALTY: defend type 2 updates immediately, survives repeated correct answer and reload
   ---
-  duration_ms: 76.8354
+  duration_ms: 80.4254
   type: 'test'
   ...
 # Subtest: FOCUS-PENALTY: defend type 3 updates immediately, survives repeated correct answer and reload
 ok 77 - FOCUS-PENALTY: defend type 3 updates immediately, survives repeated correct answer and reload
   ---
-  duration_ms: 81.3056
+  duration_ms: 70.7665
   type: 'test'
   ...
 # EXHAUSTIVE_SHOOTOUT_STATES=2686
 # Subtest: DEFENSE-RULES: all sixteen corner combinations and all four forced-concession cases
 ok 78 - DEFENSE-RULES: all sixteen corner combinations and all four forced-concession cases
   ---
-  duration_ms: 2.1891
+  duration_ms: 1.7626
   type: 'test'
   ...
 # Subtest: RULES-01: a goal credits only the kicking team; a miss credits nobody
 ok 79 - RULES-01: a goal credits only the kicking team; a miss credits nobody
   ---
-  duration_ms: 0.3278
+  duration_ms: 0.2668
   type: 'test'
   ...
 # Subtest: RULES-02: all four paired outcomes score correctly
 ok 80 - RULES-02: all four paired outcomes score correctly
   ---
-  duration_ms: 1.2173
+  duration_ms: 0.941
   type: 'test'
   ...
 # Subtest: RULES-03: rejects wrong turn, duplicate kick, post-match kick and invalid outcome
 ok 81 - RULES-03: rejects wrong turn, duplicate kick, post-match kick and invalid outcome
   ---
-  duration_ms: 0.3463
+  duration_ms: 0.2711
   type: 'test'
   ...
 # Subtest: RULES-04: early clinch works for either first team and either winner
 ok 82 - RULES-04: early clinch works for either first team and either winner
   ---
-  duration_ms: 0.2373
+  duration_ms: 0.2054
   type: 'test'
   ...
 # Subtest: RULES-05: fifth kick cannot end before a possible equaliser
 ok 83 - RULES-05: fifth kick cannot end before a possible equaliser
   ---
-  duration_ms: 0.1463
+  duration_ms: 0.119
   type: 'test'
   ...
 # Subtest: RULES-06: ties at 0–0, 3–3 and 5–5 enter sudden death
 ok 84 - RULES-06: ties at 0–0, 3–3 and 5–5 enter sudden death
   ---
-  duration_ms: 0.2137
+  duration_ms: 0.1758
   type: 'test'
   ...
 # Subtest: RULES-07: sudden death waits for the completed pair in both directions
 ok 85 - RULES-07: sudden death waits for the completed pair in both directions
   ---
-  duration_ms: 0.2603
+  duration_ms: 0.2131
   type: 'test'
   ...
 # Subtest: RULES-08: long tied shootouts continue; no arbitrary draw or round cap
 ok 86 - RULES-08: long tied shootouts continue; no arbitrary draw or round cap
   ---
-  duration_ms: 0.3324
+  duration_ms: 0.2638
   type: 'test'
   ...
 # Subtest: RULES-09: exhaustive reachable initial five-kick score paths, both starting teams
 ok 87 - RULES-09: exhaustive reachable initial five-kick score paths, both starting teams
   ---
-  duration_ms: 14.9019
+  duration_ms: 13.5627
   type: 'test'
   ...
 # Subtest: USAGE security: anonymous/other-account access denied on page, alias, and every admin operation
 ok 88 - USAGE security: anonymous/other-account access denied on page, alias, and every admin operation
   ---
-  duration_ms: 39.8208
+  duration_ms: 35.4737
   type: 'test'
   ...
 # Subtest: USAGE automatic identity: stable seed/cookie, distinct browsers, secure cookie, no PII or admin access
 ok 89 - USAGE automatic identity: stable seed/cookie, distinct browsers, secure cookie, no PII or admin access
   ---
-  duration_ms: 43.9493
+  duration_ms: 39.3826
   type: 'test'
   ...
 # Subtest: USAGE security: same-origin JSON mutations, bounded input and strict field allowlist
 ok 90 - USAGE security: same-origin JSON mutations, bounded input and strict field allowlist
   ---
-  duration_ms: 10.7971
+  duration_ms: 8.7606
   type: 'test'
   ...
 # Subtest: USAGE totals: retries are idempotent, two tabs cannot double-count time, aggregation works
 ok 91 - USAGE totals: retries are idempotent, two tabs cannot double-count time, aggregation works
   ---
-  duration_ms: 7.7404
+  duration_ms: 6.6592
   type: 'test'
   ...
 # Subtest: USAGE revoke and deletion disable automatic identity and remove all records
 ok 92 - USAGE revoke and deletion disable automatic identity and remove all records
   ---
-  duration_ms: 6.0824
+  duration_ms: 5.3772
   type: 'test'
   ...
 # Subtest: USAGE retention and write limits: expired aggregates/dedup IDs removed, burst bounded
 ok 93 - USAGE retention and write limits: expired aggregates/dedup IDs removed, burst bounded
   ---
-  duration_ms: 21.7592
+  duration_ms: 16.7918
   type: 'test'
   ...
 # Subtest: USAGE forget persists an opt-out cookie across automatic starts without deleting history
 ok 94 - USAGE forget persists an opt-out cookie across automatic starts without deleting history
   ---
-  duration_ms: 4.6879
+  duration_ms: 4.411
   type: 'test'
   ...
 # Subtest: USAGE client: idle open tab counts zero, active seconds stop at 60s, background counts zero
 ok 95 - USAGE client: idle open tab counts zero, active seconds stop at 60s, background counts zero
   ---
-  duration_ms: 2144.8245
+  duration_ms: 2091.4517
   type: 'test'
   ...
 # Subtest: USAGE client: retries preserve ID and ordinary shared app URL automatically tracks visitors
 ok 96 - USAGE client: retries preserve ID and ordinary shared app URL automatically tracks visitors
   ---
-  duration_ms: 23.1101
+  duration_ms: 25.0821
   type: 'test'
   ...
 # Subtest: USAGE automatic starts: simultaneous tabs share one identity and public registration is bounded
 ok 97 - USAGE automatic starts: simultaneous tabs share one identity and public registration is bounded
   ---
-  duration_ms: 83.9315
+  duration_ms: 89.6803
   type: 'test'
   ...
 # Subtest: USAGE migration: old links/cookies cannot merge browsers and legacy aggregates stay out of automatic totals
 ok 98 - USAGE migration: old links/cookies cannot merge browsers and legacy aggregates stay out of automatic totals
   ---
-  duration_ms: 4.8952
+  duration_ms: 4.7882
   type: 'test'
   ...
 # Subtest: USAGE client: automatic seed survives reload, opt-out survives reload, old link token never transmitted
 ok 99 - USAGE client: automatic seed survives reload, opt-out survives reload, old link token never transmitted
   ---
-  duration_ms: 42.3723
+  duration_ms: 48.4349
   type: 'test'
   ...
 # Subtest: USAGE integration: real learning answer and completed round invoke explicit hooks
 ok 100 - USAGE integration: real learning answer and completed round invoke explicit hooks
   ---
-  duration_ms: 114.2018
+  duration_ms: 123.7818
   type: 'test'
   ...
 # Subtest: USAGE admin UI: automatic visitors appear without creation or link controls, filtering and revoke
 ok 101 - USAGE admin UI: automatic visitors appear without creation or link controls, filtering and revoke
   ---
-  duration_ms: 42.1641
+  duration_ms: 46.094
   type: 'test'
   ...
 # Subtest: USAGE penalty integration: attacks, defense, retry and match completion counted once
 ok 102 - USAGE penalty integration: attacks, defense, retry and match completion counted once
   ---
-  duration_ms: 301.101
+  duration_ms: 328.5745
   type: 'test'
   ...
 # Subtest: USAGE production artifact: real assets, protected admin aliases, no source or metadata download
 ok 103 - USAGE production artifact: real assets, protected admin aliases, no source or metadata download
   ---
-  duration_ms: 401.0926
+  duration_ms: 476.7424
   type: 'test'
   ...
 # Subtest: USAGE opt-out: late start cookies cannot override independent server preference
 ok 104 - USAGE opt-out: late start cookies cannot override independent server preference
   ---
-  duration_ms: 5.5819
+  duration_ms: 6.637
   type: 'test'
   ...
 # Subtest: USAGE opt-out: delayed start response or JSON cannot re-enable another tab
 ok 105 - USAGE opt-out: delayed start response or JSON cannot re-enable another tab
   ---
-  duration_ms: 20.2565
+  duration_ms: 25.924
   type: 'test'
   ...
 # Subtest: USAGE calendar: chart uses distinct calendar dates and exact totals across both DST transitions
 ok 106 - USAGE calendar: chart uses distinct calendar dates and exact totals across both DST transitions
   ---
-  duration_ms: 79.3103
+  duration_ms: 94.0071
   type: 'test'
   ...
 # Subtest: USAGE calendar: API period and retention use calendar days at DST boundaries
 ok 107 - USAGE calendar: API period and retention use calendar days at DST boundaries
   ---
-  duration_ms: 13.1529
+  duration_ms: 17.1065
   type: 'test'
   ...
-1..107
-# tests 107
+# Subtest: USAGE concurrent reporting: shared identity accepts only twelve of twenty requests in local adapter
+ok 108 - USAGE concurrent reporting: shared identity accepts only twelve of twenty requests in local adapter
+  ---
+  duration_ms: 16.9431
+  type: 'test'
+  ...
+1..108
+# tests 108
 # suites 0
-# pass 107
+# pass 108
 # fail 0
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 14242.1322
+# duration_ms 26810.6123

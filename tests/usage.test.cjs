@@ -326,3 +326,14 @@ test('USAGE calendar: API period and retention use calendar days at DST boundari
   }finally{Date.now=original;f.close();}
  }
 });
+
+test('USAGE concurrent reporting: shared identity accepts only twelve of twenty requests in local adapter',async()=>{
+ const f=await fixture();try{
+  const s=await f.enroll();
+  const responses=await Promise.all(Array.from({length:20},()=>f.call('/api/usage/report',{method:'POST',cookie:s.cookie,data:report({activeMs:0,answers:1,completed:0})})));
+  assert.equal(responses.filter(r=>r.status===200).length,12);
+  assert.equal(responses.filter(r=>r.status===429).length,8);
+  assert.equal(f.env.DB.raw.prepare('SELECT COUNT(*) AS n FROM reports').get().n,12);
+  assert.equal(f.env.DB.raw.prepare('SELECT SUM(answers) AS n FROM daily_usage').get().n,12);
+ }finally{f.close();}
+});

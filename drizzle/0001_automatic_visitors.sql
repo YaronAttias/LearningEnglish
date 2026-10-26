@@ -1,0 +1,1 @@
+ALTER TABLE students ADD COLUMN source TEXT NOT NULL DEFAULT 'legacy';

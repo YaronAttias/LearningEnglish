@@ -12,7 +12,6 @@
     return result.json();
   }
   function cell(row, text, className) { const el = document.createElement('td'); el.textContent = text; if (className) el.className = className; row.append(el); return el; }
-  function showLink(link) { $('personal-link').value = link; $('copy-status').textContent = ''; $('link-dialog').showModal(); }
   async function load() {
     const current = ++loading;
     $('admin-status').textContent = 'טוען נתונים…';
@@ -28,7 +27,7 @@
       for (const student of data.students) {
         const row = document.createElement('tr');
         const name = cell(row,student.label,'student-name');
-        if (student.revoked) { const status = document.createElement('span'); status.className = 'student-state'; status.textContent = 'הקישור הושבת'; name.append(status); }
+        if (student.revoked) { const status = document.createElement('span'); status.className = 'student-state'; status.textContent = 'המעקב הופסק'; name.append(status); }
         cell(row,student.last_seen ? dateFormat.format(student.last_seen) : 'טרם השתמש');
         cell(row,minutes(student.active_ms) === 1 ? 'דקה אחת' : minutes(student.active_ms) + ' דקות'); cell(row,student.answers); cell(row,student.completed);
         const actions = cell(row,''); const group = document.createElement('div'); group.className = 'row-actions'; actions.append(group);
@@ -37,8 +36,7 @@
           b.onclick = async () => { b.disabled = true; try { await action(); } catch(error) { $('admin-status').textContent = error.message; } finally { b.disabled = false; } }; group.append(b);
         }
         if (!student.revoked) {
-          button('קישור אישי','copy',async () => showLink((await api(`students/${student.id}/link`,'POST',{})).link));
-          button('השבתה','',async () => { if (confirm('להשבית את הקישור של ' + student.label + '? הנתונים יישמרו.')) { await api(`students/${student.id}/revoke`,'POST',{}); await load(); } });
+          button('הפסקת מעקב','',async () => { if (confirm('להפסיק מעקב אחר ' + student.label + '? הנתונים הקיימים יישמרו.')) { await api(`students/${student.id}/revoke`,'POST',{}); await load(); } });
         }
         button('מחיקה','delete',async () => { if (confirm('למחוק לצמיתות את ' + student.label + ' ואת כל נתוני המעקב שלו?')) { await api(`students/${student.id}`,'DELETE'); await load(); } });
         $('students').append(row);
@@ -67,20 +65,6 @@
     }
     chart.setAttribute('aria-label', `${days === 7 ? 'דקות לפי יום' : 'דקות בקבוצות של ' + width + ' ימים'}: ` + bins.map(b => b.label + ': ' + minutes(b.total)).join(', '));
   }
-  $('add-student').onclick = () => { $('student-label').value = ''; $('create-status').textContent = ''; $('student-dialog').showModal(); $('student-label').focus(); };
-  $('cancel-create').onclick = () => $('student-dialog').close();
-  $('student-form').onsubmit = async event => {
-    event.preventDefault(); $('create').disabled = true;
-    try { const result = await api('students','POST',{label:$('student-label').value.trim()}); $('student-dialog').close(); showLink(result.link); await load(); }
-    catch(error) { $('create-status').textContent = error.message; }
-    finally { $('create').disabled = false; }
-  };
-  $('copy-link').onclick = async () => {
-    try { await navigator.clipboard.writeText($('personal-link').value); $('copy-status').textContent = 'הקישור הועתק.'; }
-    catch { $('personal-link').select(); $('copy-status').textContent = 'סמנו והעתיקו את הקישור ידנית.'; }
-  };
-  $('close-link').onclick = () => { $('link-dialog').close(); $('personal-link').value = ''; };
-  $('link-dialog').addEventListener('close', () => { $('personal-link').value = ''; });
   $('period').onchange = load; $('refresh').onclick = load;
   void load();
 })();

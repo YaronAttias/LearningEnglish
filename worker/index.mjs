@@ -1,6 +1,6 @@
 // Public learners never receive an identity header requirement. Sites verifies
 // and injects the owner identity at its dispatch boundary; never expose this Worker directly.
-const COOKIE = '__Host-wl-learner';
+const COOKIE = '__Host-wl-visitor-v2';
 const DAY = 86400000;
 const tokenPattern = /^[a-f0-9]{32}\.\d{1,8}\.[A-Za-z0-9_-]{43}$/;
 const security = {
@@ -45,7 +45,6 @@ async function body(request) {
   return result;
 }
 function onlyKeys(obj, keys) { return Object.keys(obj).every(k => keys.includes(k)); }
-function hexId() { return [...crypto.getRandomValues(new Uint8Array(16))].map(b => b.toString(16).padStart(2, '0')).join(''); }
 async function signingKey(env) {
   if (!env.LEARNER_LINK_KEY || env.LEARNER_LINK_KEY.length < 32) throw new Error('config');
   return crypto.subtle.importKey('raw', new TextEncoder().encode(env.LEARNER_LINK_KEY), {name: 'HMAC', hash: 'SHA-256'}, false, ['sign', 'verify']);
@@ -60,13 +59,13 @@ async function learner(token, env) {
   const [id, version, signature] = token.split('.');
   const bytes = Uint8Array.from(atob(signature.replace(/-/g, '+').replace(/_/g, '/') + '='), c => c.charCodeAt(0));
   if (!await crypto.subtle.verify('HMAC', await signingKey(env), bytes, new TextEncoder().encode(`${id}.${version}`))) return null;
-  return env.DB.prepare('SELECT id, version FROM students WHERE id = ? AND version = ? AND revoked = 0').bind(id, Number(version)).first();
+  return env.DB.prepare("SELECT id, version FROM students WHERE id = ? AND version = ? AND revoked = 0 AND source = 'automatic'").bind(id, Number(version)).first();
 }
 function cookie(request) {
   const values = (request.headers.get('Cookie') || '').split(';').map(s => s.trim()).filter(s => s.startsWith(COOKIE + '='));
   return values.length === 1 ? values[0].slice(COOKIE.length + 1) : '';
 }
-const cookieHeader = token => `${COOKIE}=${token}; Path=/; Secure; HttpOnly; SameSite=Strict; Max-Age=${token ? 90 * 86400 : 0}`;
+const cookieHeader = token => `${COOKIE}=${token}; Path=/; Secure; HttpOnly; SameSite=Strict; Max-Age=${90 * 86400}`;
 function localDay(now) { return new Intl.DateTimeFormat('en-CA', {timeZone: 'Asia/Jerusalem', year: 'numeric', month: '2-digit', day: '2-digit'}).format(new Date(now)); }
 
 export async function handle(request, env, asset) {
@@ -85,24 +84,15 @@ export async function handle(request, env, asset) {
           env.DB.prepare('DELETE FROM reports WHERE received_at < ?').bind(Date.now() - DAY),
         ]);
         const cutoff = localDay(Date.now() - (days - 1) * DAY);
-        const rows = await env.DB.prepare(`SELECT s.id, s.label, s.revoked, s.last_seen,
+        const rows = await env.DB.prepare(`SELECT s.id, s.label, s.source, s.revoked, s.last_seen,
           COALESCE(SUM(d.active_ms), 0) AS active_ms, COALESCE(SUM(d.answers), 0) AS answers,
           COALESCE(SUM(d.completed), 0) AS completed FROM students s
           LEFT JOIN daily_usage d ON d.student_id = s.id AND d.day >= ?
-          GROUP BY s.id ORDER BY s.created_at, s.id`).bind(cutoff).all();
-        const daily = await env.DB.prepare('SELECT day, SUM(active_ms) AS active_ms FROM daily_usage WHERE day >= ? GROUP BY day ORDER BY day').bind(cutoff).all();
+          WHERE s.source = 'automatic' GROUP BY s.id ORDER BY s.created_at, s.id`).bind(cutoff).all();
+        const daily = await env.DB.prepare("SELECT d.day, SUM(d.active_ms) AS active_ms FROM daily_usage d JOIN students s ON s.id = d.student_id WHERE d.day >= ? AND s.source = 'automatic' GROUP BY d.day ORDER BY d.day").bind(cutoff).all();
         return json({students: rows.results, daily: daily.results, days});
       }
-      if (route === '/api/admin/students' && request.method === 'POST') {
-        const input = await body(request);
-        if (!onlyKeys(input, ['label']) || typeof input.label !== 'string' || !/^[\p{L}\p{N} ._-]{1,32}$/u.test(input.label.trim())) return fail(400);
-        const count = await env.DB.prepare('SELECT COUNT(*) AS n FROM students').first();
-        if (count.n >= 200) return fail(409);
-        const student = {id: hexId(), version: 1};
-        await env.DB.prepare('INSERT INTO students (id, label, version, created_at, meter_at) VALUES (?, ?, 1, ?, ?)').bind(student.id, input.label.trim(), Date.now(), Date.now()).run();
-        return json({id: student.id, link: `${url.origin}/#learner=${await makeToken(student, env)}`}, 201);
-      }
-      const match = route.match(/^\/api\/admin\/students\/([a-f0-9]{32})(?:\/(link|revoke))?$/);
+      const match = route.match(/^\/api\/admin\/students\/([a-f0-9]{32})(?:\/(revoke))?$/);
       if (match && request.method === 'POST' && match[2]) {
         if (!onlyKeys(await body(request), [])) return fail(400);
         const student = await env.DB.prepare('SELECT id, version, revoked FROM students WHERE id = ?').bind(match[1]).first();
@@ -111,8 +101,6 @@ export async function handle(request, env, asset) {
           await env.DB.prepare('UPDATE students SET revoked = 1, version = version + 1 WHERE id = ?').bind(student.id).run();
           return json({ok: true});
         }
-        if (student.revoked) return fail(409);
-        return json({link: `${url.origin}/#learner=${await makeToken(student, env)}`});
       }
       if (match && !match[2] && request.method === 'DELETE') {
         await env.DB.batch([
@@ -124,13 +112,31 @@ export async function handle(request, env, asset) {
       }
       return fail(404);
     }
-    if (route === '/api/usage/enroll' && request.method === 'POST') {
+    // Retire transferable links, including ones issued before automatic tracking.
+    if (route === '/api/usage/enroll') return fail(410);
+    if (route === '/api/usage/start' && request.method === 'POST') {
       const input = await body(request);
-      if (!onlyKeys(input, ['token']) || !await learner(input.token, env)) return fail(403);
-      return json({ok: true}, 200, {'Set-Cookie': cookieHeader(input.token)});
+      if (!onlyKeys(input, ['seed']) || typeof input.seed !== 'string' || !/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(input.seed)) return fail(400);
+      if (cookie(request) === 'off') return json({enabled:false});
+      let student = await learner(cookie(request), env);
+      if (!student) {
+        // Deterministic server-derived ID makes concurrent starts/retries idempotent.
+        // A client cannot claim a visible dashboard ID by submitting it as a seed.
+        const digest = new Uint8Array(await crypto.subtle.sign('HMAC', await signingKey(env), new TextEncoder().encode('visitor-v2:' + input.seed.toLowerCase())));
+        const id = [...digest.slice(0,16)].map(b => b.toString(16).padStart(2,'0')).join('');
+        const now = Date.now();
+        await env.DB.prepare(`INSERT OR IGNORE INTO students (id, label, version, created_at, meter_at, source)
+          SELECT ?, ?, 1, ?, ?, 'automatic' WHERE
+          (SELECT COUNT(*) FROM students WHERE created_at > ?) < 120 AND (SELECT COUNT(*) FROM students) < 10000`)
+          .bind(id, 'דפדפן ' + id.slice(0,12), now, now, now - 60000).run();
+        student = await env.DB.prepare('SELECT id, version, revoked FROM students WHERE id = ?').bind(id).first();
+        if (!student) return json({error:'המעקב ינסה שוב בהמשך'},429,{'Retry-After':'60'});
+        if (student.revoked) return json({enabled:false},200,{'Set-Cookie':cookieHeader('off')});
+      }
+      return json({enabled:true}, 200, {'Set-Cookie': cookieHeader(await makeToken(student, env))});
     }
     if (route === '/api/usage/status' && request.method === 'GET') return json({enabled: !!await learner(cookie(request), env)});
-    if (route === '/api/usage/forget' && request.method === 'POST') return json({ok: true}, 200, {'Set-Cookie': cookieHeader('')});
+    if (route === '/api/usage/forget' && request.method === 'POST') return json({ok: true}, 200, {'Set-Cookie': cookieHeader('off')});
     if (route === '/api/usage/report' && request.method === 'POST') {
       const student = await learner(cookie(request), env);
       if (!student) return fail(403);

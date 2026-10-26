@@ -3,6 +3,7 @@ const fs = require('node:fs'), path = require('node:path');
 function createDB(filename = ':memory:') {
   const db = new DatabaseSync(filename); db.exec('PRAGMA foreign_keys = ON');
   if (!db.prepare("SELECT name FROM sqlite_master WHERE name='students'").get()) db.exec(fs.readFileSync(path.join(__dirname,'../drizzle/0000_usage.sql'),'utf8'));
+  if (!db.prepare('PRAGMA table_info(students)').all().some(column => column.name === 'source')) db.exec(fs.readFileSync(path.join(__dirname,'../drizzle/0001_automatic_visitors.sql'),'utf8'));
   function prepare(sql) {
     let args = [];
     const query = {bind(...values) { args = values; return query; },

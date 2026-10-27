@@ -2,7 +2,7 @@
 // dependency-free Worker; no files outside this explicit allowlist are served.
 const fs = require('node:fs'), path = require('node:path');
 const root = path.resolve(__dirname, '..');
-const files = ['index.html','style.css','theme.css','penalty.css','words.js','shootout.js','penalty.js','app.js','about.js','usage.js','admin.html','admin.css','admin.js','images/vocabulary-atlas.png'];
+const files = ['index.html','style.css','theme.css','penalty.css','words.js','shootout.js','penalty.js','app.js','present-simple-data.js','present-simple.js','present-simple.css','about.js','usage.js','admin.html','admin.css','admin.js','images/vocabulary-atlas.png'];
 const assets = Object.fromEntries(files.map(f => ['/' + f, fs.readFileSync(path.join(root, 'dist', f)).toString('base64')]));
 const worker = fs.readFileSync(path.join(root, 'worker/index.mjs'), 'utf8');
 const source = worker + '\nconst assets = ' + JSON.stringify(assets) + `;

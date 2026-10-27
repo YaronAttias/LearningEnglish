@@ -1,0 +1,54 @@
+{
+  "feature": "Present Simple",
+  "questions": 60,
+  "categories": {
+    "positive": 20,
+    "negative": 20,
+    "question": 20
+  },
+  "automated": {
+    "tests": 116,
+    "passed": 116,
+    "failed": 0
+  },
+  "browser": {
+    "engine": "Chrome",
+    "tested": [
+      "correct answer",
+      "incorrect answer and correction",
+      "next question",
+      "category switching"
+    ],
+    "viewports": [
+      {
+        "requestedWidth": 360,
+        "horizontalOverflow": false,
+        "fourChoices": true,
+        "targetsAtLeast44px": true
+      },
+      {
+        "requestedWidth": 390,
+        "horizontalOverflow": false,
+        "fourChoices": true,
+        "targetsAtLeast44px": true
+      },
+      {
+        "requestedWidth": 768,
+        "horizontalOverflow": false,
+        "fourChoices": true,
+        "targetsAtLeast44px": true
+      },
+      {
+        "requestedWidth": 1280,
+        "horizontalOverflow": false,
+        "fourChoices": true,
+        "targetsAtLeast44px": true
+      }
+    ],
+    "consoleErrors": []
+  },
+  "limits": [
+    "No physical iOS/Android or screen-reader testing",
+    "Screenshot capture timed out; DOM and viewport checks passed"
+  ]
+}

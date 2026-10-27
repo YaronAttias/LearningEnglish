@@ -17,6 +17,7 @@ function boot({stored,storageBlocked=false,speech=true,confirm=true,shotOutcome=
   const mount=w.WordPenalty.mount;w.WordPenalty.mount=(host,options)=>mount(host,{...options,noCanvas:true,instant:true,shotOutcome,opponentAim:i=>shotOutcome('away',i)?0:1});
   vm.runInContext(fs.readFileSync(path.join(root,'dist/words.js'),'utf8'),dom.getInternalVMContext(),{filename:'words.js'});
   vm.runInContext(fs.readFileSync(path.join(root,'dist/app.js'),'utf8'),dom.getInternalVMContext(),{filename:'app.js'});
+  for(const file of ['present-simple-data.js','present-simple.js']) vm.runInContext(fs.readFileSync(path.join(root,'dist',file),'utf8'),dom.getInternalVMContext(),{filename:file});
   const $=s=>w.document.querySelector(s), all=s=>[...w.document.querySelectorAll(s)];
   const click=s=>{const el=$(s);if(!el)throw Error('Missing '+s);el.click();};
   const mode=i=>click(`[data-mode="${i}"]`);
